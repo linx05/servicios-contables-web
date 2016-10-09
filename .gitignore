@@ -3,6 +3,7 @@
 .git
 node_modules
 .idea
+/server/config/local.env.js
 .settings
 *.log
 dist/

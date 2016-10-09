@@ -1,0 +1,17 @@
+<form name="loginForm" ng-submit="$ctrl.onSubmit();">
+
+	<div class="form-group label-floating" ng-class="{ 'is-empty': !$ctrl.data.name }">
+		<label class="control-label" for="email">Email or Username</label>
+		<input type="text" class="form-control" id="email" ng-model="$ctrl.data.name"
+			required>
+	</div>
+
+	<div class="form-group label-floating" ng-class="{ 'is-empty': !$ctrl.data.password }">
+		<label class="control-label" for="password">Password</label>
+		<input type="password" class="form-control" id="password" ng-model="$ctrl.data.password"
+			required>
+	</div>
+
+	<button type="submit" class="btn btn-raised btn-primary btn-block">Login</button>
+
+</form>

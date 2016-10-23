@@ -1,12 +1,13 @@
 <div id="login" class="col-xs-9 col-sm-5 col-md-5 col-lg-6 well bs-component centered vcenter">
 
-	<h1 class="text-center">App</h1>
+	<h1 class="text-center">Servicios Contables</h1>
 
 	<login-form data="$ctrl.credentials" on-login="$ctrl.login($event);"></login-form>
 
 	<div ng-if="$ctrl.error" class="alert alert-dismissible alert-danger">
 		<button type="button" class="close" data-dismiss="alert">×</button>
-		<h5>Validation Error</h5>
+		<h5>Error de Validation</h5>
+		<h4>Usuario y/o Contraseña Incorrecta</h4>
 	</div>
 
 </div>

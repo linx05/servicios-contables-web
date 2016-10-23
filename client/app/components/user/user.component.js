@@ -3,8 +3,6 @@ import controller from './user.controller';
 import './user.css';
 
 let userComponent = {
-  restrict: 'E',
-  bindings: {},
   template,
   controller
 };

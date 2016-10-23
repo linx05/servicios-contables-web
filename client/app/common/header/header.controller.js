@@ -2,10 +2,9 @@ let state, authService;
 
 class HeaderController {
 
-    constructor ($state, Auth) {
+    constructor ($state, AuthenticationService) {
         state = $state;
-        authService = Auth;
-
+        authService = AuthenticationService;
     }
 
     getLoginName () {

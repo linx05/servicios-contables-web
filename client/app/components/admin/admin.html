@@ -1,3 +1,16 @@
-<div>
-  <h1>{{ $ctrl.name }}</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-lg-2">
+            <nav class="navbar navbar-default navbar-fixed-side">
+                <sidebar></sidebar>
+            </nav>
+        </div>
+        <div class="col-sm-9 col-lg-10">
+            <!-- your page content -->
+            <h1>{{ $ctrl.name }}</h1>
+            <datos-form></datos-form>
+        </div>
+    </div>
 </div>
+
+

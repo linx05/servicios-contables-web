@@ -1,0 +1,15 @@
+<form ng-submit="$ctrl.guardar()" novalidate>
+    <div class="form-group">
+        <label for="datosForm">RFC</label>
+        <input type="text" class="form-control" ng-model="$ctrl.rfc" id="datosForm" placeholder="">
+    </div>
+    <div class="form-group">
+        <label for="razonSocial">Nombre/Razon Social</label>
+        <input type="text" class="form-control" id="razonSocial" ng-model="$ctrl.razon" placeholder="">
+    </div>
+    <div class="form-group">
+        <label for="domicilio">Domicilio</label>
+        <input type="text" class="form-control" id="domicilio" ng-model="$ctrl.domicilio" placeholder="">
+    </div>
+    <button type="submit" class="btn btn-default">Guardar</button>
+</form>

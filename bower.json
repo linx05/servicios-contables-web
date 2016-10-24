@@ -1,0 +1,25 @@
+{
+  "name": "servicios-contables-web",
+  "description": "",
+  "main": "client/app.js",
+  "authors": [
+    "Cesar Laredo <claredo@tri-sigma.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "webpack",
+    "es6"
+  ],
+  "homepage": "https://github.com/linx05/servicios-contables-web",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+  }
+}

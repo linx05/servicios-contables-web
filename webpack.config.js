@@ -7,7 +7,7 @@ module.exports = {
     entry  : {},
     module : {
         loaders: [
-            {test: /\.js$/, exclude: [/app\/lib/, /node_modules/], loader: 'ng-annotate!babel'},
+            {test: /\.js$/, exclude: [/app\/lib/, /node_modules/, /bower_components/], loader: 'ng-annotate!babel'},
             {test: /\.html$/, loader: 'raw'},
             {test: /\.styl$/, loader: 'style!css!stylus'},
             {test: /\.css$/, loader: 'style!css'},
@@ -25,6 +25,9 @@ module.exports = {
         ]
     },
     resolve: {
+        resolve: {
+            modulesDirectories: ["web_modules", "node_modules", "bower_components"]
+        },
         alias: {
             // Bind version of jquery
             jquery: "jquery",

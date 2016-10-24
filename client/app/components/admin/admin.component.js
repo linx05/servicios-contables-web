@@ -3,8 +3,6 @@ import controller from './admin.controller';
 import './admin.css';
 
 let adminComponent = {
-  restrict: 'E',
-  bindings: {},
   template,
   controller
 };

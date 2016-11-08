@@ -1,7 +1,8 @@
 'use strict';
 
-var path = require('path');
-var _ = require('lodash');
+const path = require('path');
+const _ = require('lodash');
+let dotenv = require('dotenv').config({silent: true});
 
 function requiredProcessEnv (name) {
     if (!process.env[name]) {
@@ -26,12 +27,14 @@ var all = {
     ip: process.env.IP || '0.0.0.0',
 
     // Should we populate the DB with sample data?
-    seedDB: false,
+    seedDB: process.env.SEED_DB ? eval(process.env.SEED_DB) : false,
 
     // Secret for session, you will want to change this and make it an environment variable
     secrets: {
         session: 'api-secret'
     },
+
+    DEFAULT_PWD: process.env.DEFAULT_PWD || '13246578',
 
     // List of user roles
     userRoles: ['guest', 'user', 'admin'],

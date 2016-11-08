@@ -1,12 +1,12 @@
 [
   {
-    "full_name": "Employee",
-    "email": "employee@services.com",
-    "level": "employee",
+    "full_name": "Empleado",
+    "email": "empleado@services.com",
+    "level": "empleado",
     "active": true,
-    "local": {
-      "username": "employee1",
-      "password": "employee"
+    "cuenta": {
+      "username": "empleado1",
+      "password": "empleado"
     }
   },
   {
@@ -14,19 +14,19 @@
     "email": "admin@services.com",
     "level": "admin",
     "active": true,
-    "local": {
+    "cuenta": {
       "username": "admin1",
       "password": "admin"
     }
   },
   {
-    "full_name": "User 1",
-    "email": "user1@services.com",
-    "level": "user",
+    "full_name": "Cliente 1",
+    "email": "cliente1@services.com",
+    "level": "cliente",
     "active": true,
-    "local": {
-      "username": "user1",
-      "password": "user"
+    "cuenta": {
+      "username": "cliente1",
+      "password": "cliente"
     }
   }
 

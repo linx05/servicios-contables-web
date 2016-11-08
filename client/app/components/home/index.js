@@ -12,7 +12,7 @@ let homeModule = angular.module('home', [
     .state('home', {
         url      : '/i/home',
         component: 'home',
-        data     : {requiresLogin: true, level: ['user']}
+        data     : {requiresLogin: true, level: ['usuario']}
     });
     $urlRouterProvider.otherwise('/login');
 })

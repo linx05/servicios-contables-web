@@ -4,8 +4,6 @@ let uniqueValidator = require('mongoose-unique-validator');
 let bcrypt = require('bcryptjs');
 let Schema = mongoose.Schema;
 
-const LocalAccount = require('./local/local.model');
-
 mongoose.plugin(uniqueValidator);
 
 const requiredStringValidator = [
@@ -29,7 +27,7 @@ let UserSchema = new Schema({
     level      : {
         type    : String,
         required: true,
-        enum    : ['admin', 'user', 'employee']
+        enum    : ['admin', 'cliente', 'empleado']
     },
     active     : {
         type   : Boolean,
@@ -70,8 +68,5 @@ UserSchema.methods.validPassword = function (password) {
 
 module.exports = {
     User      : mongoose.model('User', UserSchema),
-    UserSchema: UserSchema,
-    accounts  : {
-        LocalAccount: LocalAccount
-    }
+    UserSchema: UserSchema
 };

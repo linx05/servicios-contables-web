@@ -1,6 +1,5 @@
 'use strict';
 
-var _ = require('lodash');
 const Cliente = require('./cliente.model').Cliente;
 const User = require('../user/user.model').User;
 
@@ -98,6 +97,6 @@ exports.destroy = function (req, res) {
     });
 };
 
-function handleError (res, err) {
-    return res.status(500).send(err);
+function handleError(res, err, code = 400) {
+    return res.status(code).send(err);
 }

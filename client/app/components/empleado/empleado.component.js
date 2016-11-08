@@ -1,6 +1,6 @@
-import template from './employee.html';
-import controller from './employee.controller';
-import './employee.css';
+import template from './empleado.html';
+import controller from './empleado.controller';
+import './empleado.css';
 
 let employeeComponent = {
   restrict: 'E',

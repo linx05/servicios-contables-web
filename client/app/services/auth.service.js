@@ -59,11 +59,11 @@ class AuthService {
     }
 
     isEmployee() {
-        return this.getLoginLevel() === 'employee';
+        return this.getLoginLevel() === 'empleado';
     }
 
     isUser() {
-        return this.getLoginLevel() === 'user';
+        return this.getLoginLevel() === 'cliente';
     }
 
     isTokenExpired() {

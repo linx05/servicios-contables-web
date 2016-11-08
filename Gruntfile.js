@@ -150,7 +150,7 @@ module.exports = function (grunt) {
             // opens browser on initial server start
             nodemon.on('config:update', function () {
               setTimeout(function () {
-                require('open')('http://localhost:8080/debug?port=5858');
+                // require('open')('http://localhost:8080/debug?port=5858');
               }, 500);
             });
           }
@@ -256,7 +256,6 @@ module.exports = function (grunt) {
         'env:prod',
         'express:prod',
         'wait',
-        'open',
         'express-keepalive'
         ]);
     }
@@ -274,7 +273,6 @@ module.exports = function (grunt) {
       'env:all',
       'express:dev',
       'wait',
-      'open',
       'watch'
     ]);
   });

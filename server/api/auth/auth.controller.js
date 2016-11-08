@@ -60,10 +60,10 @@ exports = module.exports = ()=> {
             let promise = User.findOne({
                 $or: [
                     {email: req.body.login},
-                    {'local.username': req.body.login}
+                    {'cuenta.username': req.body.login}
                 ]
             })
-                .select('+local.password')
+                .select('+cuenta.password')
                 .exec();
 
             return promise

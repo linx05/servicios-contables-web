@@ -87,7 +87,7 @@ let clienteSchema = new Schema({
         username: {type: String, unique: true},
         password: {type: String, select: false}
     },
-    contacto: contactoSchema,
+    contactos: [contactoSchema],
     perfil : perfilSchema,
 
 }, {
@@ -118,7 +118,7 @@ clienteSchema.methods.validPassword = function (password) {
 };
 
 module.exports = {
-    Cliente: mongoose.model('Cliente', clienteSchema),
+    User: mongoose.model('User', clienteSchema),
     UserSchema: clienteSchema,
     accounts: {
         LocalAccount: LocalAccount

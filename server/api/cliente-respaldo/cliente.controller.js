@@ -1,6 +1,6 @@
 'use strict';
 
-let User = require('./user.model').User;
+let User = require('./cliente.model.js').User;
 
 // Get list of User
 exports.index = function (req, res) {
@@ -29,6 +29,15 @@ exports.show = function (req, res) {
 
 };
 
+exports.create = (req, res) => {
+  const request = req.body;
+    let local = {
+        username: request.username || undefined,
+        password: request.password
+    };
+    // let cliente-respaldo = ne
+};
+
 exports.createLocalAccount = (req, res) => {
     const request = req.body;
     let local = {
@@ -41,6 +50,11 @@ exports.createLocalAccount = (req, res) => {
         level: 'user',
         local: local
     });
+    if (request.hasOwnProperty('interpreter')) {
+        user.interpreter = {
+
+        }
+    }
     return user.save(function (err, user) {
         if (!err) return res.status(201).json(user);
         return handleError(res, err, 422);

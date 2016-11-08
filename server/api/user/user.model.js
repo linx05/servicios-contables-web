@@ -35,7 +35,7 @@ let UserSchema = new Schema({
         type   : Boolean,
         default: true
     },
-    local      : {
+    cuenta      : {
         username: {type: String, unique: true},
         password: {type: String, select: false}
     },
@@ -51,10 +51,10 @@ let UserSchema = new Schema({
 UserSchema.pre('save', function (callback) {
     let user = this;
     // Break out if the password hasn't changed
-    if (!user.isModified('local.password')) return callback();
+    if (!user.isModified('cuenta.password')) return callback();
 
     // Password changed so we need to hash it
-    user.local.password = UserSchema.statics.generateHash(user.local.password);
+    user.cuenta.password = UserSchema.statics.generateHash(user.cuenta.password);
     callback();
 });
 
@@ -65,7 +65,7 @@ UserSchema.statics.generateHash = function (password) {
 
 // checking if password is valid
 UserSchema.methods.validPassword = function (password) {
-    return bcrypt.compareSync(password, this.local.password);
+    return bcrypt.compareSync(password, this.cuenta.password);
 };
 
 module.exports = {

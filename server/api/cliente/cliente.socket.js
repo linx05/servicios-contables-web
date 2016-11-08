@@ -4,21 +4,21 @@
 
 'use strict';
 
-// var Auth = require('./auth.model');
-//
-// exports.register = function (socket) {
-//    Auth.schema.post('save', function (doc) {
-//        onSave(socket, doc);
-//    });
-//    Auth.schema.post('remove', function (doc) {
-//        onRemove(socket, doc);
-//    });
-// };
+var Cliente = require('./cliente.model');
+
+exports.register = function(socket) {
+  Cliente.schema.post('save', function (doc) {
+    onSave(socket, doc);
+  });
+  Cliente.schema.post('remove', function (doc) {
+    onRemove(socket, doc);
+  });
+}
 
 function onSave(socket, doc, cb) {
-    socket.emit('auth:save', doc);
+  socket.emit('cliente:save', doc);
 }
 
 function onRemove(socket, doc, cb) {
-    socket.emit('auth:remove', doc);
+  socket.emit('cliente:remove', doc);
 }

@@ -1,13 +1,13 @@
 'use strict';
 
-let controller = require('./cliente.controller.js');
-let rolesMiddleware = require('../../middleware/roles.middleware');
+var express = require('express');
+var controller = require('./cliente.controller');
 
-let router = express.Router();
+var router = express.Router();
 
-router.get('/', rolesMiddleware.admin, controller.index);
-router.get('/:userId', rolesMiddleware.public, controller.show);
-router.post('/', controller.createLocalAccount);
+router.get('/', controller.index);
+router.get('/:id', controller.show);
+router.post('/', controller.create);
 router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);

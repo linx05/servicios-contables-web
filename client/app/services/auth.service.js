@@ -49,9 +49,14 @@ class AuthService {
         return token ? jwt.decodeToken(token).name : null;
     }
 
+    getDecodedToken() {
+        const token = this.getToken();
+        return token ? jwt.decodeToken(token) : null;
+    }
+
     isLogged() {
         const token = this.getToken();
-        return token ? true : false;
+        return !!token;
     }
 
     isAdmin() {

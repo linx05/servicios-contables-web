@@ -22,31 +22,35 @@ function JwtOptionConfig ($httpProvider, jwtOptionsProvider) {
     });
 }
 
-routesMiddleware.$inject = ['$q', '$transitions', 'AuthService'];
-function routesMiddleware ($q, $transitions, AuthService) {
-    const q = $q;
-    const auth = AuthService;
+function routesMiddleware($q, $rootScope, $transitions, AuthService) {
+    'ngInject';
+    const q      = $q;
+    const auth   = AuthService;
     const $state = $transitions._router.stateService;
 
+    $state.defaultErrorHandler((error) => {
+        // console.log(error);
+    });
+
     $transitions.onStart({}, (transition) => {
-        const state = transition.to();
+        const state         = transition.to();
+        const levels        = state.data.level;
+        const requiresLogin = state.data.requiresLogin;
 
         if (!state) return redirectToHome();
 
-        const levels = state.data.level;
-        const requiresLogin = state.data.requiresLogin;
 
-        if (typeof homeMiddleWare()                         !== 'undefined') return;
-        if (typeof requiresLoginMiddleware(requiresLogin)   !== 'undefined') return;
-        if (typeof levelsMiddleware(levels)                 !== 'undefined') return;
+        // if (typeof homeMiddleWare()                       !== 'undefined') return;
+        if (typeof requiresLoginMiddleware(requiresLogin) !== 'undefined') return;
+        if (typeof levelsMiddleware(levels)               !== 'undefined') return;
 
-        function requiresLoginMiddleware (requiresLogin) {
+        function requiresLoginMiddleware(requiresLogin) {
             if ((requiresLogin && !auth.isLogged()) || (!requiresLogin && auth.isLogged())) {
                 return redirectToHome();
             }
         }
 
-        function levelsMiddleware (levels) {
+        function levelsMiddleware(levels) {
             if (!levels) return true;
 
             if (!levels.includes(auth.getLoginLevel())) {
@@ -54,7 +58,7 @@ function routesMiddleware ($q, $transitions, AuthService) {
             }
         }
 
-        function homeMiddleWare () {
+        function homeMiddleWare() {
             if (state.name === 'home') {
                 return redirectToHome();
             }
@@ -71,20 +75,16 @@ function routesMiddleware ($q, $transitions, AuthService) {
             });
     });
 
-    function getHome () {
+    function getHome() {
         switch (auth.getLoginLevel()) {
-            case 'admin'      :
-                return 'admin';
-            case 'empleado'   :
-                return 'empleado';
-            case 'cliente'    :
-                return 'cliente';
-            default           :
-                return 'login';
+            case 'admin'  	: return 'admin';
+            case 'empleado'	: return 'empleado';
+            case 'cliente'	: return 'cliente';
+            default			: return 'login';
         }
     }
 
-    function redirectToHome () {
+    function redirectToHome() {
         return $state.go(getHome());
     }
 }

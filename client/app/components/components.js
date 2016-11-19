@@ -4,18 +4,18 @@ import Login from './login';
 import Admin from './admin';
 import Empleado from './empleado';
 import User from './user';
-import Sidebar from './admin/sidebar';
 import DatosForm from './admin/datosForm';
 import Cliente from './cliente';
+import CLientes from './clientes';
 
 let componentModule = angular.module('app.components', [
     Login,
     Admin,
     Cliente,
+    CLientes,
     Empleado,
     User,
     Home,
-    Sidebar,
     DatosForm
 ])
     .name;

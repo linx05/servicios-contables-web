@@ -38,7 +38,7 @@ exports.createLocalAccount = (req, res) => {
     let user = new User({
         full_name: request.name,
         email: request.email,
-        level: 'user',
+        level: request.level,
         local: local
     });
     return user.save(function (err, user) {

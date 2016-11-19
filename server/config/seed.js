@@ -10,7 +10,7 @@ let User = require('../api/user/user.model').User;
 // Insert seed data below
 // var clienteSeed = require('../api/cliente/cliente.seed.json');
 let userSeed = require('../api/user/user.seed.json');
-
+console.log('running seeds!');
 // Insert seed inserts below
 // Cliente.find({}).remove(function() {
 // 	Cliente.create(clienteSeed);

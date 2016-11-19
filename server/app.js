@@ -42,7 +42,7 @@ app.use(bodyParser.json());
 //Add passport to application
 app.use(auth.initialize());
 //Add permission middleware to application
-app.use(levelsMiddleware.rolesMiddleware());
+// app.use(levelsMiddleware.rolesMiddleware());
 
 let server = require('http').createServer(app);
 let socketio = require('socket.io')(server, {

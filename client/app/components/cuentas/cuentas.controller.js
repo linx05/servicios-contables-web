@@ -9,18 +9,36 @@ class CuentasController {
     }
 
     $onInit () {
-        this.cuentasService.get()
-            .then(cuentas => {
-                this.cuentas = _.filter(cuentas, cuenta => {
-                    return cuenta.level === 'empleado';
-                });
+
+    }
+    $onChanges (changes) {
+        if(changes.data){
+            this.data = this.filter(this.data);
+        }
+    }
+    filter(data) {
+        return _.filter(data, cuenta => {
+            return cuenta.level === 'empleado';
+        });
+    }
+
+    add (cuenta = null) {
+        this.modalOptions.data = cuenta;
+        return this.modal.show(this.modalOptions)
+            .then(() => this.cuentasService.get().then(data => this.data = this.filter(data)));
+    }
+
+    edit({ data }) {
+        this.cuentasService.find(data._id)
+            .then((data) => {
+                return this.add(data);
             });
     }
 
-    add (account = null) {
-        this.modalOptions.data = account;
-        return this.modal.show(this.modalOptions)
-            .then(() => this.cuentasService.get().then(data => this.data = data));
+    delete({ data }) {
+        this.cuentasService.remove(data._id)
+            .then(() => this.cuentasService.get().then(data => this.data = this.filter(data)));
+
     }
 }
 CuentasController.$inject = ['CuentasService', 'ModalService'];

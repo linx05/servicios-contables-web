@@ -14,18 +14,15 @@ exports.index = function (req, res) {
 
 // Get a single user
 exports.show = function (req, res) {
-    if (req.user) return res.json({user: req.user});
-    else {
-        User.findById(req.params.userId, function (err, user) {
-            if (err) {
-                return handleError(res, err);
-            }
-            if (!user) {
-                return res.status(404).send('Not Found');
-            }
-            return res.json(user);
-        });
-    }
+    User.findById(req.params.userId, function (err, user) {
+        if (err) {
+            return handleError(res, err);
+        }
+        if (!user) {
+            return res.status(404).send('Not Found');
+        }
+        return res.status(200).json(user);
+    });
 
 };
 
@@ -35,6 +32,7 @@ exports.createLocalAccount = (req, res) => {
         username: request.username || undefined,
         password: request.password
     };
+    console.log(request);
     let user = new User({
         full_name: request.name,
         email: request.email,
@@ -87,6 +85,7 @@ exports.destroy = function (req, res) {
     });
 };
 
-function handleError(res, err, code = 500) {
+function handleError (res, err, code = 500) {
+    console.log(err);
     return res.status(code).send(err);
 }

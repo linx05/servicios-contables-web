@@ -4,7 +4,8 @@ import './cuentas-list.css';
 
 let cuentasListComponent = {
     bindings: {
-        pageSize: '<',
+        onSelectItem: '&',
+        onDeleteItem: '&',
         cuentas: '<'
     },
     template,

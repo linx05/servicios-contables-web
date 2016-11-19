@@ -37,7 +37,7 @@ class ApiService {
         return this.httpExecute(url, 'PUT', data);
     }
 
-    httpDelete() {
+    httpDelete(url) {
         return this.httpExecute(url, 'DELETE');
     }
 

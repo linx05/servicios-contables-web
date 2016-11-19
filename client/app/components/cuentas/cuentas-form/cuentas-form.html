@@ -3,7 +3,7 @@
         <div class="form-group">
             <div class="togglebutton">
                 <label>
-                    <input type="checkbox" checked> Activo
+                    <input type="checkbox" ng-model="$ctrl.data.active" checked> Activo
                 </label>
             </div>
         </div>
@@ -18,8 +18,7 @@
         <div class="form-group">
             <label for="level">Nivel</label>
             <select class="form-control" name="level" id="level" ng-model="$ctrl.data.level"
-                    ng-options="item as level.name for level in $ctrl.levels track by level.id"
-                    ng-model-options="{ trackBy: '$value' }">
+                    ng-options="level.id as level.name for level in $ctrl.levels track by level.id" ng-required="true">
                 <option value="" selected="selected">Escoje un Nivel</option>
             </select>
         </div>

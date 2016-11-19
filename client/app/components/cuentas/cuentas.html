@@ -3,8 +3,8 @@
         <button class="btn btn-raised btn-success pull-right" ng-click="$ctrl.add()">Agregar</button>
     </div>
     <div class="col-sm-12">
-
-        <cuentas-list cuentas="$ctrl.cuentas" page-size="$ctrl.pageSize"></cuentas-list>
+        <cuentas-list cuentas="$ctrl.data" on-select-item="$ctrl.edit($event)"
+                      on-delete-item="$ctrl.delete($event)"></cuentas-list>
     </div>
 </div>
 

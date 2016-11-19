@@ -34,7 +34,7 @@ let UserSchema = new Schema({
         default: true
     },
     cuenta      : {
-        username: {type: String, unique: true},
+        username: {type: String, unique: true, sparse:true},
         password: {type: String, select: false}
     },
     settings   : {

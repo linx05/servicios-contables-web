@@ -1,7 +1,6 @@
-export default class cuentasService {
+class CuentasService {
 
     constructor(ApiService) {
-        'ngInject';
         this.api = ApiService;
     }
 
@@ -36,3 +35,7 @@ export default class cuentasService {
     }
 
 }
+CuentasService.$inject = ['ApiService'];
+export default CuentasService;
+
+

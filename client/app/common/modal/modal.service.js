@@ -10,7 +10,7 @@ class ModalService {
 
 	generateTemplate(component) {
 		const bindings = ` 
-			data="$ctrl.locals.data" 
+			data="$ctrl.data" 
 			event="$ctrl.event" 
 			on-accept="$ctrl.ok()" 
 			on-cancel="$ctrl.cancel()" 

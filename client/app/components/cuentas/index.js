@@ -6,12 +6,14 @@ import cuentasComponent from './cuentas.component';
 import cuentasList from './cuentas-list';
 import cuentasEdit from './cuentas-edit';
 import cuentasForm from './cuentas-form';
+import cuentasItem from './cuentas-item';
 
 let cuentasModule = angular.module('cuentas', [
     'angularUtils.directives.dirPagination',
     cuentasList,
     cuentasEdit,
-    cuentasForm
+    cuentasForm,
+    cuentasItem
 ])
     .service('CuentasService', CuentasService)
     .component('cuentas', cuentasComponent)
@@ -20,7 +22,12 @@ let cuentasModule = angular.module('cuentas', [
             .state('cuentas', {
                 url: '/i/cuentas',
                 component: 'cuentas',
-                data: {requiresLogin: true, level: ['admin']}
+                data: {requiresLogin: true, level: ['admin']},
+                resolve: {
+                    data: ['CuentasService',function (CuentasService) {
+                        return CuentasService.get().then(data => data);
+                    }],
+                }
             });
         $urlRouterProvider.otherwise('/login');
     })

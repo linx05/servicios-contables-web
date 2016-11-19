@@ -1,0 +1,9 @@
+<tr>
+    <td>{{ $ctrl.data.full_name }}</td>
+    <td>{{ $ctrl.data.email }}</td>
+    <td>{{ $ctrl.data.level }}</td>
+    <td><input type="checkbox" disabled ng-model="$ctrl.data.active"></td>
+    <td><a class="btn btn-default" ng-click="$ctrl.select()">Edit</a></td>
+    <td><a class="btn btn-danger" ng-click="$ctrl.delete()">Eliminar</a></td>
+    <td></td>
+</tr>

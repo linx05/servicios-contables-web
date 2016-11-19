@@ -7,6 +7,7 @@
             <th>Nivel</th>
             <th>Activo</th>
             <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -15,7 +16,8 @@
             <td>{{ user.email }}</td>
             <td>{{ user.level }}</td>
             <td><input type="checkbox" disabled ng-model="user.active"></td>
-            <td></td>
+            <td><a class="btn btn-default" ng-click="$ctrl.selectItem(user)">Editar</a></td>
+            <td><a class="btn btn-danger" ng-click="$ctrl.deleteItem(user)">Eliminar</a></td>
         </tr>
         </tbody>
     </table>

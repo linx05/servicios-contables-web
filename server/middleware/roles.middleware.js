@@ -15,11 +15,15 @@ user.use('public', function () {
 });
 
 user.use('cliente', function (req) {
-    if (req.user.level === 'cliente' || req.user.level === 'empleado' || req.user.level === 'admin') return true;
+    return (req.user.level === 'cliente' || req.user.level === 'empleado' || req.user.level === 'admin');
 });
 
 user.use('empleado', function (req) {
-    if (req.user.level === 'cliente' || req.user.level === 'admin') return true;
+    return (req.user.level === 'cliente' || req.user.level === 'admin');
+});
+
+user.use('admin', (req) => {
+    return req.user.level === 'admin'
 });
 
 user.use(function (req) {
@@ -28,13 +32,11 @@ user.use(function (req) {
     }
 });
 
-user.use('admin', (req) => req.user.level === 'admin');
-
 module.exports = {
     rolesMiddleware: user.middleware,
     public         : combine([tokenMiddleware, user.can('public')]),
     user           : combine([tokenMiddleware, user.can('cliente')]),
-    interpreter    : combine([tokenMiddleware, user.can('empleado')]),
+    employee       : combine([tokenMiddleware, user.can('empleado')]),
     admin          : combine([tokenMiddleware, user.can('admin')])
 };
 

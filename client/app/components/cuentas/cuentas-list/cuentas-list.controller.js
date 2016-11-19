@@ -1,11 +1,17 @@
 class cuentasListController {
-  constructor() {
-    this.name = 'cliente';
-  }
+    $onChanges(changes) {
+        if (changes.cuentas) {
+            this.cuentas = Object.assign({}, this.cuentas);
+        }
+    }
 
-  $onInit() {
-
-  }
+    getCuentas(newPageNumber, oldPageNumber) {
+        this.onPageChange({
+            $event: {
+                data: { newPageNumber, oldPageNumber }
+            }
+        });
+    }
 }
 
 export default cuentasListController;

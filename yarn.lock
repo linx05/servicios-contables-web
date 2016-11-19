@@ -71,9 +71,9 @@ amdefine@>=0.0.4:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.0.tgz#fd17474700cb5cc9c2b709f0be9d23ce3c198c33"
 
-angular-jwt@^0.1.5:
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/angular-jwt/-/angular-jwt-0.1.7.tgz#3bfe560e66dd00199e48f5f51d369f369dfabfe6"
+angular-jwt@^0.1.8:
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/angular-jwt/-/angular-jwt-0.1.8.tgz#a2a7ddce6dc7af3803dcc3b68a0c7ee73c52b1d2"
 
 angular-loading-bar@^0.9.0:
   version "0.9.0"
@@ -98,6 +98,10 @@ angular-ui-bootstrap@^2.1.4:
 angular-ui-router@^1.0.0-beta.1:
   version "1.0.0-beta.3"
   resolved "https://registry.yarnpkg.com/angular-ui-router/-/angular-ui-router-1.0.0-beta.3.tgz#18d5b4af4662cdc282d1e1d7df29cb7085df9d28"
+
+angular-utils-pagination:
+  version "0.11.1"
+  resolved "https://registry.yarnpkg.com/angular-utils-pagination/-/angular-utils-pagination-0.11.1.tgz#efad7c8879beb30ad3d77707f93e3d0ef51f2c66"
 
 angular@^1.5.0:
   version "1.5.8"

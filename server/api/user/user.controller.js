@@ -59,7 +59,7 @@ exports.update = function (req, res) {
         if (!user) {
             return res.status(404).send('Not Found');
         }
-        var updated = _.merge(user, req.body);
+        let updated = _.merge(user, req.body);
         updated.save(function (err) {
             if (err) {
                 return handleError(res, err);

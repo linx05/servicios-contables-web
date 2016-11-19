@@ -1,12 +1,13 @@
 const routes = {
     api: 'http://localhost:9000'
 };
+let http, q;
 
 class ApiService {
 
     constructor($http, $q) {
-        this.$http = $http;
-        this.$q = $q;
+        http = $http;
+        q = $q;
         routes.api += '/api/';
     }
 
@@ -15,7 +16,7 @@ class ApiService {
     }
 
     httpExecute(urlResource, method, data = null) {
-        return this.$http({
+        return http({
             url: routes.api + urlResource,
             method: method,
             data: data,
@@ -45,7 +46,7 @@ class ApiService {
     }
 
     requestFailed(error) {
-        return this.$q.reject(error);
+        return q.reject(error);
     }
 
 }

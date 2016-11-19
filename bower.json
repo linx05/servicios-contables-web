@@ -20,6 +20,5 @@
     "test",
     "tests"
   ],
-  "dependencies": {
-  }
+  "dependencies": {}
 }

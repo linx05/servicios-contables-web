@@ -19,7 +19,7 @@ import AppComponent from './app.component';
 import Common from './common/common';
 import Components from './components/components';
 import Services from './services/services';
-import { jwtInterceptor, JwtOptionConfig, routesMiddleware, loadingBarConfig } from './app.config';
+import { JwtOptionConfig, routesMiddleware, loadingBarConfig } from './app.config';
 
 const root = angular.module('app', [
     uiRouter,
@@ -33,7 +33,6 @@ const root = angular.module('app', [
     Components
   ])
     .component('app',AppComponent)
-    .config(jwtInterceptor)
     .config(JwtOptionConfig)
     .config(loadingBarConfig)
     .run(routesMiddleware)

@@ -6,13 +6,15 @@ import Empleado from './empleado';
 import User from './user';
 import DatosForm from './admin/datosForm';
 import Cliente from './cliente';
-import CLientes from './clientes';
+import Clientes from './clientes';
+import Cuentas from './cuentas';
 
 let componentModule = angular.module('app.components', [
     Login,
     Admin,
     Cliente,
-    CLientes,
+    Clientes,
+    Cuentas,
     Empleado,
     User,
     Home,

@@ -1,12 +1,15 @@
 import angular from 'angular';
-import cuentasService from './cuentas.service';
+import pagination from 'angular-utils-pagination';
+
+import CuentasService from './cuentas.service';
 import cuentasComponent from './cuentas.component';
 import cuentasList from './cuentas-list';
 
 let cuentasModule = angular.module('cuentas', [
+    'angularUtils.directives.dirPagination',
     cuentasList
 ])
-    .service('cuentasService', cuentasService)
+    .service('CuentasService', CuentasService)
     .component('cuentas', cuentasComponent)
     .config(($stateProvider, $urlRouterProvider) => {
         $stateProvider

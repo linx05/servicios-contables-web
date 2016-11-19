@@ -1,28 +1,20 @@
-jwtInterceptor.$inject = ['$httpProvider', 'jwtInterceptorProvider'];
-function jwtInterceptor ($httpProvider, jwtInterceptorProvider) {
-
-    jwtInterceptorProvider.tokenGetter = ['AuthService', function (AuthService) {
-        jwtInterceptorProvider.authPrefix = 'JWT ';
-        if (AuthService.getToken() && AuthService.isTokenExpired()) {
-            AuthService.refresh()
-                .catch(function () {
-                    AuthService.logout();
-                });
-        }
-        return AuthService.getToken();
-    }];
-
-    $httpProvider.interceptors.push('jwtInterceptor');
-}
-
 JwtOptionConfig.$inject = ['$httpProvider', 'jwtOptionsProvider'];
 function JwtOptionConfig ($httpProvider, jwtOptionsProvider) {
     jwtOptionsProvider.config({
-        whiteListedDomains: ['localhost', 'localhost:9000']
+        authPrefix : 'JWT ',
+        whiteListedDomains: ['localhost'],
+        tokenGetter: ['AuthService', (AuthService) => {
+            if (AuthService.getToken() && AuthService.isTokenExpired()) {
+                AuthService.refresh()
+                    .catch(() => AuthService.logout());
+            }
+            return AuthService.getToken();
+        }]
     });
+    $httpProvider.interceptors.push('jwtInterceptor');
 }
-
-function routesMiddleware($q, $rootScope, $transitions, AuthService) {
+routesMiddleware.$inject = ['$q', '$transitions', 'AuthService'];
+function routesMiddleware($q, $transitions, AuthService) {
     'ngInject';
     const q      = $q;
     const auth   = AuthService;
@@ -94,4 +86,4 @@ function loadingBarConfig (cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeSpinner = false;
 }
 
-export {jwtInterceptor, JwtOptionConfig, routesMiddleware, loadingBarConfig};
+export {JwtOptionConfig, routesMiddleware, loadingBarConfig};

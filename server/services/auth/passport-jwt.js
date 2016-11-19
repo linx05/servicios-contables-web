@@ -8,7 +8,7 @@ let config = require('../../config/auth');
 
 let params = {
     secretOrKey   : config.jwtSecret,
-    authScheme    : 'Bearer',
+    authScheme    : 'JWT',
     jwtFromRequest: ExtractJwt.fromAuthHeader()
 };
 
@@ -25,14 +25,14 @@ const strategy = function (jwt_payload, done) {
     });
 };
 
-module.exports = function () {
-    passport.use(new JwtStrategy(params, strategy));
-    return {
+
+passport.use(new JwtStrategy(params, strategy));
+
+module.exports = {
         initialize  : function () {
             return passport.initialize();
         },
         authenticate: function () {
             return passport.authenticate("jwt", {session: config.jwtSession});
-        }
     }
 };

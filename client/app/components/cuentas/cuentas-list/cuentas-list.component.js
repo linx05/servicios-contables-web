@@ -3,8 +3,12 @@ import controller from './cuentas-list.controller';
 import './cuentas-list.css';
 
 let cuentasListComponent = {
-  template,
-  controller
+    bindings: {
+        pageSize: '<',
+        cuentas: '<'
+    },
+    template,
+    controller
 };
 
 export default cuentasListComponent;

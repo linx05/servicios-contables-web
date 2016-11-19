@@ -1,4 +1,4 @@
-import navbarFixed from './navbar-fixed-side.css'
+import './navbar-fixed-side.css'
 
 class AdminController {
   constructor() {

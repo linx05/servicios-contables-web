@@ -1,0 +1,11 @@
+@media (min-width: 620px) {
+	#componentModal {
+		min-width: 600px;
+	}
+}
+
+@media (max-width: 619px) {
+	#componentModal {
+		min-width: 60vh;
+	}
+}

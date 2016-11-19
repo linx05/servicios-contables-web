@@ -1,9 +1,10 @@
 //Dependencies
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
-import angularSocketIO from 'angular-socket-io';
+import 'arrive';
+import 'angular-socket-io';
 import angularUIBootstrap from 'angular-ui-bootstrap';
-import loadingBar from 'angular-loading-bar';
+import 'angular-loading-bar';
 
 //CSS
 import bootstrap from 'bootstrap-webpack';

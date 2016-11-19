@@ -1,0 +1,16 @@
+<div class="modal-header">
+    <h4>{{$ctrl.title}}</h4>
+</div>
+
+<div class="modal-body" id="componentModal">
+    ${component}
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-raised btn-default" ng-click="$ctrl.setEvent('CANCEL'); $ctrl.cancel()">
+        Cancelar
+    </button>
+    <button class="btn btn-raised btn-primary" ng-click="$ctrl.setEvent('OK')" ng-disabled="$ctrl.loading">
+        Guardar
+    </button>
+</div>

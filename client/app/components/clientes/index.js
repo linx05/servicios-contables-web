@@ -2,9 +2,11 @@ import angular from 'angular';
 import ClientesService from './clientes.service';
 import clientesComponent from './clientes.component';
 import clientesList from './clientes-list';
+import clientesForm from './clientes-form';
 
 let clientesModule = angular.module('clientes', [
-    clientesList
+    clientesList,
+    clientesForm
 ])
     .service('ClientesService', ClientesService)
     .component('clientes', clientesComponent)

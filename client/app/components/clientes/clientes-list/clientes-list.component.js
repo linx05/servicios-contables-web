@@ -3,8 +3,13 @@ import controller from './clientes-list.controller';
 import './clientes-list.css';
 
 let clientesListComponent = {
-  template,
-  controller
+    bindings: {
+        onSelectItem: '&',
+        onDeleteItem: '&',
+        clientes: '<'
+    },
+    template,
+    controller
 };
 
 export default clientesListComponent;

@@ -1,1 +1,10 @@
-<clientes-list></clientes-list>
+<div class="row">
+    <div class="col-sm-12">
+        <button class="btn btn-raised btn-success pull-right" ng-click="$ctrl.add()">Agregar</button>
+    </div>
+    <div class="col-sm-12">
+        <clientes-list clientes="$ctrl.data" on-select-item="$ctrl.edit($event)"
+                      on-delete-item="$ctrl.delete($event)"></clientes-list>
+    </div>
+</div>
+

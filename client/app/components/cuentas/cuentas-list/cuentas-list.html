@@ -1,4 +1,4 @@
-<div id="reports" class="table-responsive">
+<div id="reports">
     <table class="table table-striped table-hover clickable">
         <thead>
         <tr>
@@ -7,17 +7,19 @@
             <th>Nivel</th>
             <th>Activo</th>
             <th></th>
-            <th></th>
         </tr>
         </thead>
         <tbody>
         <tr dir-paginate="user in $ctrl.cuentas | itemsPerPage: $ctrl.pageSize">
             <td>{{ user.full_name }}</td>
             <td>{{ user.email }}</td>
-            <td>{{ user.level }}</td>
-            <td><input type="checkbox" disabled ng-model="user.active"></td>
-            <td><a class="btn btn-default" ng-click="$ctrl.selectItem(user)">Editar</a></td>
-            <td><a class="btn btn-danger" ng-click="$ctrl.deleteItem(user)">Eliminar</a></td>
+            <td class="text-capitalize">{{ user.level }}</td>
+            <td><div class="checkbox">
+                <label><input type="checkbox" disabled ng-model="user.active"></label>
+            </div></td>
+            <td><a class="btn btn-default" ng-click="$ctrl.selectItem(user)">Editar</a>
+                <a class="btn btn-danger" ng-click="$ctrl.deleteItem(user)">Eliminar</a>
+            </td>
         </tr>
         </tbody>
     </table>

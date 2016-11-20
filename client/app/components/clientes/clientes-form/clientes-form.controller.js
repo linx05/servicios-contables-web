@@ -1,9 +1,8 @@
 let form;
 
-export default class AccountFormController {
+export default class ClientesFormController {
 
     constructor() {
-        'ngInject';
     }
 
     $onInit() {

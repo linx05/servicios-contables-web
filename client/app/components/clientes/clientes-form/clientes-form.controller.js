@@ -1,25 +1,20 @@
 let form;
 
-export default class ClientesFormController {
+class ClientesFormController {
 
-    constructor() {
+    constructor(WizardHandler) {
+        this.wizard = WizardHandler;
+        this.repeatPerfil = [0];
+        this.periocidad = ['mensual', 'bimestral', 'trimestral', 'cuatrimestral', 'semestral', 'anual'];
     }
 
     $onInit() {
-        this.levels = [
-            { id: 'admin',    name: 'Admin'    },
-            { id: 'employee', name: 'Employee' },
-            { id: 'user',     name: 'User'     },
-        ];
     }
 
     $onChanges(changes) {
         if (changes.data) {
             this.data = Object.assign({}, this.data);
-            this.data.name = this.data.full_name;
-            if (angular.isUndefined(this.data.active)){
-                this.data.active = true;
-            }
+            this.data.perfil = Object.assign([], this.data.perfil);
         }
 
         if (changes.event) {
@@ -28,15 +23,32 @@ export default class ClientesFormController {
         }
     }
 
+    addPerfil() {
+        this.repeatPerfil.push(this.repeatPerfil.length);
+    }
+
+    checkStep() {
+        let currentStep = this.wizard.wizard().currentStepNumber();
+        let totalSteps  = this.wizard.wizard().totalStepCount();
+        if(currentStep === totalSteps) {
+            this.canSubmit = true;
+        }
+    }
+
+    removePerfil() {
+        if (this.repeatPerfil.length>1) {
+            this.repeatPerfil.pop();
+            this.data.perfil.pop();
+        }
+    }
+
     onSubmit() {
-        if (form.$invalid) return form.$setSubmitted();
-        this.onSave({
-            $event: { data: this.data }
-        });
+        if(this.canSubmit) {
+            this.onSave({
+                $event: { data: this.data }
+            });
+        }
     }
-
-    setForm(f) {
-        form = f;
-    }
-
 }
+ClientesFormController.$inject = ['WizardHandler'];
+export default ClientesFormController;

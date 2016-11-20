@@ -3,8 +3,13 @@ import controller from './clientes-form.controller';
 import './clientes-form.css';
 
 let clientesFormComponent = {
-  template,
-  controller
+    bindings: {
+        data: '<',
+        event: '<',
+        onSave: '&',
+    },
+    template,
+    controller
 };
 
 export default clientesFormComponent;

@@ -1,6 +1,6 @@
 class CuentasController {
     constructor (CuentasService, ModalService) {
-        this.cuentasService = CuentasService;
+        this.clientesService = CuentasService;
         this.modal = ModalService;
         this.modalOptions = {
             component: '<cuentas-edit></cuentas-edit>',
@@ -25,19 +25,19 @@ class CuentasController {
     add (cuenta = null) {
         this.modalOptions.data = cuenta;
         return this.modal.show(this.modalOptions)
-            .then(() => this.cuentasService.get().then(data => this.data = this.filter(data)));
+            .then(() => this.clientesService.get().then(data => this.data = this.filter(data)));
     }
 
     edit({ data }) {
-        this.cuentasService.find(data._id)
+        this.clientesService.find(data._id)
             .then((data) => {
                 return this.add(data);
             });
     }
 
     delete({ data }) {
-        this.cuentasService.remove(data._id)
-            .then(() => this.cuentasService.get().then(data => this.data = this.filter(data)));
+        this.clientesService.remove(data._id)
+            .then(() => this.clientesService.get().then(data => this.data = this.filter(data)));
 
     }
 }

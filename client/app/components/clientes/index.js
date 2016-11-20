@@ -1,4 +1,7 @@
 import angular from 'angular';
+import 'angular-wizard/dist/angular-wizard.min';
+import 'angular-wizard/dist/angular-wizard.min.css';
+
 import ClientesService from './clientes.service';
 import clientesComponent from './clientes.component';
 import clientesList from './clientes-list';
@@ -6,6 +9,7 @@ import clientesForm from './clientes-form';
 import clientesEdit from './clientes-edit';
 
 let clientesModule = angular.module('clientes', [
+    'mgo-angular-wizard',
     clientesList,
     clientesForm,
     clientesEdit

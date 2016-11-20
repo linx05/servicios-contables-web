@@ -24,12 +24,16 @@ export default class clientesEditController {
 
 	save({ data }) {
 		const clientesData = {
-			name: data.name,
-			email: data.email,
-			level: data.level,
-			password: '123456789',
+            datos_basicos: {
+                rfc: data.rfc,
+                razon_social: data.razon_social,
+                domicilio: data.domicilio,
+            },
+            contacto: data.contacto,
+            esquema_pago: data.esquema_pago,
+            perfil: data.perfil
 		};
-
+        console.log(clientesData);
 		const operation = data._id ? clientes.edit(data._id, clientesData)
 								   : clientes.add(clientesData);
 

@@ -30,30 +30,26 @@ exports.show = function (req, res) {
 exports.create = function (req, res) {
     const request = req.body;
     let local = {
-        username: request.usuario || undefined,
-        password: request.clave || claveDefecto
+        username: request.usuario || request.datos_basicos.rfc,
+        password: request.clave || request.datos_basicos.rfc
     };
-    let cliente = new Cliente(Object.assign({}, request.datos_basicos, {contacto: request.contacto}));
-    if (request.perfil && request.obligaciones) {
-        cliente.perfil = request.perfil;
-        cliente.perfil.obligaciones.push(request.obligaciones);
-    }
-
-    cliente.save((err, cliente)=> {
+    let cliente = new Cliente(Object.assign({}, request.datos_basicos, {esquema_pago: request.esquema_pago}, {contacto: request.contacto}));
+    cliente.perfil = request.perfil;
+    cliente.save((err, cliente) => {
         if (err) {
             return handleError(res, err);
         }
         User.create({
             full_name: request.datos_basicos.razon_social,
-            email: request.datos_basicos.email,
-            level: 'user',
+            email: request.contacto.email,
+            level: 'cliente',
             cuenta: local,
-            active: false,
-        }, (err, user)=> {
+            active: true,
+        }, (err, user) => {
             if (err) {
                 return handleError(res, err);
             }
-            return res.status(201).json({user,cliente});
+            return res.status(201).json({user, cliente});
         });
     });
 };
@@ -70,7 +66,7 @@ exports.update = function (req, res) {
         if (!cliente) {
             return res.status(404).send('Not Found');
         }
-        var updated = _.merge(cliente, req.body);
+        let updated = _.merge(cliente, req.body);
         updated.save(function (err) {
             if (err) {
                 return handleError(res, err);
@@ -97,6 +93,6 @@ exports.destroy = function (req, res) {
     });
 };
 
-function handleError(res, err, code = 400) {
+function handleError (res, err, code = 400) {
     return res.status(code).send(err);
 }

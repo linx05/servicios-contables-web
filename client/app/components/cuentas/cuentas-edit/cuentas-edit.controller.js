@@ -27,7 +27,7 @@ export default class CuentasEditController {
 			name: data.name,
 			email: data.email,
 			level: data.level,
-			password: '123456789',
+			password: 'pass',
 		};
 
 		const operation = data._id ? cuentas.edit(data._id, cuentasData)

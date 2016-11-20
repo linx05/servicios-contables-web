@@ -1,8 +1,8 @@
 'use strict';
 
-let uniqueValidator = require('mongoose-unique-validator');
-let bcrypt = require('bcryptjs');
-let Schema = mongoose.Schema;
+const uniqueValidator = require('mongoose-unique-validator');
+const bcrypt = require('bcryptjs');
+const Schema = mongoose.Schema;
 
 const LocalAccount = require('./local/local.model');
 
@@ -22,6 +22,18 @@ let contactoSchema = new Schema({
     },
     observaciones: {
         type: String
+    }
+});
+
+let esquemaPagoSchema = new Schema({
+    total: {
+        type: Number,
+        required: true
+    },
+    periocidad: {
+        type: String,
+        required: true,
+        enum: ['mensual', 'bimestral', 'trimestral', 'cuatrimestral', 'semestral', 'anual']
     }
 });
 
@@ -67,8 +79,7 @@ let perfilSchema = new Schema({
         type: String,
         required: true,
         enum: []
-    },
-    obligaciones: [obligacionSchema]
+    }
 });
 
 let clienteSchema = new Schema({
@@ -83,12 +94,12 @@ let clienteSchema = new Schema({
     domicilio: {
         type: String
     },
-    cuenta      : {
-        username: {type: String, unique: true},
-        password: {type: String, select: false}
+    id_user: {
+        type: String
     },
     contacto: contactoSchema,
-    perfil : perfilSchema,
+    esquema_pago: esquemaPagoSchema,
+    perfil: [perfilSchema],
 
 }, {
     timestamps: {
@@ -96,6 +107,8 @@ let clienteSchema = new Schema({
         updatedAt: 'updated_at',
     }
 });
+
+clienteSchema.plugin(uniqueValidator);
 
 clienteSchema.pre('save', function (callback) {
     let user = this;

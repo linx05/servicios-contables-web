@@ -3,8 +3,11 @@ import controller from './clientes.controller';
 import './clientes.css';
 
 let clienteComponent = {
-  template,
-  controller
+    bindings: {
+        data: '<',
+    },
+    template,
+    controller
 };
 
 export default clienteComponent;

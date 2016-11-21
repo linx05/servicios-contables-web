@@ -9,6 +9,17 @@ class ClientesListController {
         }
     }
 
+    filterFunc (value, index, array) {
+        if($ctrl.filter=='') return true;
+
+    }
+
+    assignItem(item) {
+        this.onAssignItem({
+            $event: {data: item}
+        });
+    }
+
     selectItem(item) {
         this.onSelectItem({
             $event: {data: item}
@@ -21,7 +32,7 @@ class ClientesListController {
         });
     }
 
-    getCuentas(newPageNumber, oldPageNumber) {
+    getClientes(newPageNumber, oldPageNumber) {
         this.onPageChange({
             $event: {
                 data: { newPageNumber, oldPageNumber }

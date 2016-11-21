@@ -33,7 +33,6 @@ export default class clientesEditController {
             esquema_pago: data.esquema_pago,
             perfil: data.perfil
 		};
-        console.log(clientesData);
 		const operation = data._id ? clientes.edit(data._id, clientesData)
 								   : clientes.add(clientesData);
 

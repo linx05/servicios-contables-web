@@ -13,14 +13,20 @@ class ClientesController {
     }
     $onChanges (changes) {
         if(changes.data){
-            this.data = this.filter(this.data);
+            this.clientes = this.data = this.filter(this.data);
         }
     }
     filter(data) {
         return data;
-        // return _.filter(data, cuenta => {
-        //     return cuenta.level === 'empleado';
-        // });
+    }
+
+    filterClientes() {
+        if (this.filterSearch.length < 1) this.clientes = this.data;
+        else {
+            this.clientes = this.data.filter(cliente => {
+                return cliente.rfc.toLowerCase().includes(this.filterSearch.toLowerCase());
+            });
+        }
     }
 
     add (cuenta = null) {

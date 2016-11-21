@@ -86,4 +86,14 @@ function loadingBarConfig (cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeSpinner = false;
 }
 
-export {JwtOptionConfig, routesMiddleware, loadingBarConfig};
+import angular from 'angular';
+
+toastrConfig.$inject = ['toastrConfig'];
+function toastrConfig (toastrConfig) {
+    angular.extend(toastrConfig, {
+        newestOnTop: true,
+        positionClass: 'toast-bottom-right',
+    });
+}
+
+export {JwtOptionConfig, routesMiddleware, loadingBarConfig, toastrConfig};

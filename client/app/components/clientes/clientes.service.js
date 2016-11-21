@@ -1,18 +1,25 @@
 class ClientesService {
 
-    constructor(ApiService) {
+    constructor(ApiService, toastr) {
         this.api = ApiService;
+        this.toastr = toastr;
     }
 
     add(cliente) {
         return this.api.httpPost('clientes', cliente)
-            .then(data => data)
+            .then(data => {
+                this.toastr.success('Se guardo el cliente exitosamente!','Exito');
+                return data;
+            })
             .catch(this.api.requestFailed);
     }
 
     edit(id, cliente) {
         return this.api.httpPut(`clientes/${id}`, cliente)
-            .then(data => data)
+            .then(data => {
+                this.toastr.success('Se actualizo el cliente exitosamente!','Exito');
+                return data;
+            })
             .catch(this.api.requestFailed);
     }
 
@@ -30,12 +37,15 @@ class ClientesService {
 
     remove(id) {
         return this.api.httpDelete(`clientes/${id}`)
-            .then(data => data)
+            .then(data => {
+                this.toastr.success('Se elimino el cliente exitosamente!','Exito');
+                return data;
+            })
             .catch(this.api.requestFailed);
     }
 
 }
-ClientesService.$inject = ['ApiService'];
+ClientesService.$inject = ['ApiService', 'toastr'];
 export default ClientesService;
 
 

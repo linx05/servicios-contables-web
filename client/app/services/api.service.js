@@ -1,13 +1,14 @@
 const routes = {
     api: 'http://localhost:9000'
 };
-let http, q;
+let http, q, toast;
 
 class ApiService {
 
-    constructor($http, $q) {
+    constructor($http, $q, toastr) {
         http = $http;
         q = $q;
+        toast = toastr;
         routes.api += '/api/';
     }
 
@@ -46,11 +47,12 @@ class ApiService {
     }
 
     requestFailed(error) {
+        toast.error('No se pudo llevar a cabo la operacion!','Error');
         return q.reject(error);
     }
 
 }
 
-ApiService.$inject = ['$http', '$q'];
+ApiService.$inject = ['$http', '$q', 'toastr'];
 
 export default ApiService;

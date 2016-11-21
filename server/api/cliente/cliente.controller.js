@@ -6,7 +6,7 @@ const User = require('../user/user.model').User;
 const claveDefecto = config.DEFAULT_PASSWORD || '123456780';
 
 exports.index = function (req, res) {
-    Cliente.find(function (err, clientes) {
+    Cliente.find({}, function (err, clientes) {
         if (err) {
             return handleError(res, err);
         }
@@ -35,17 +35,18 @@ exports.create = function (req, res) {
     };
     let cliente = new Cliente(Object.assign({}, request.datos_basicos, {esquema_pago: request.esquema_pago}, {contacto: request.contacto}));
     cliente.perfil = request.perfil;
-    cliente.save((err, cliente) => {
+    User.create({
+        full_name: request.datos_basicos.razon_social,
+        email: request.contacto.email,
+        level: 'cliente',
+        cuenta: local,
+        active: true,
+    }, (err, user) => {
         if (err) {
             return handleError(res, err);
         }
-        User.create({
-            full_name: request.datos_basicos.razon_social,
-            email: request.contacto.email,
-            level: 'cliente',
-            cuenta: local,
-            active: true,
-        }, (err, user) => {
+        cliente.user_id = user._id;
+        cliente.save((err, cliente) => {
             if (err) {
                 return handleError(res, err);
             }
@@ -84,12 +85,22 @@ exports.destroy = function (req, res) {
         if (!cliente) {
             return res.status(404).send('Not Found');
         }
-        cliente.remove(function (err) {
+        User.findById(cliente.user_id, (err, user) => {
             if (err) {
                 return handleError(res, err);
             }
-            return res.status(204).send('No Content');
+            if (!user) {
+                return res.status(404).send('Not Found');
+            }
+            cliente.remove(function (err) {
+                user.remove();
+                if (err) {
+                    return handleError(res, err);
+                }
+                return res.status(204).send('No Content');
+            });
         });
+
     });
 };
 

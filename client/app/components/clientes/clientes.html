@@ -1,9 +1,13 @@
 <div class="row">
     <div class="col-sm-12">
+        <input id="filter" type="text" class="form-control"
+                                  placeholder="Busqueda"
+                                  ng-model="$ctrl.filterSearch"
+                                  ng-change="$ctrl.filterClientes()">
         <button class="btn btn-raised btn-success pull-right" ng-click="$ctrl.add()">Agregar</button>
     </div>
     <div class="col-sm-12">
-        <clientes-list clientes="$ctrl.data" on-select-item="$ctrl.edit($event)"
+        <clientes-list clientes="$ctrl.clientes" on-select-item="$ctrl.edit($event)"
                       on-delete-item="$ctrl.delete($event)"></clientes-list>
     </div>
 </div>

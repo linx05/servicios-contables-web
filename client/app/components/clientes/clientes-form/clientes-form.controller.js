@@ -15,6 +15,10 @@ class ClientesFormController {
         if (changes.data) {
             this.data = Object.assign({}, this.data);
             this.data.perfil = Object.assign([], this.data.perfil);
+            _.forEach(this.data.perfil,()=>{
+                this.addPerfil();
+            });
+            this.repeatPerfil.pop();
         }
 
         if (changes.event) {

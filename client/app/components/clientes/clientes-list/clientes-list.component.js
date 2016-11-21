@@ -6,6 +6,7 @@ let clientesListComponent = {
     bindings: {
         onSelectItem: '&',
         onDeleteItem: '&',
+        onAssignItem: '&',
         clientes: '<'
     },
     template,

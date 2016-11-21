@@ -5,8 +5,10 @@ import 'arrive';
 import 'angular-socket-io';
 import angularUIBootstrap from 'angular-ui-bootstrap';
 import 'angular-loading-bar';
+import 'angular-toastr/dist/angular-toastr.tpls.min';
 
 //CSS
+import 'angular-toastr/dist/angular-toastr.min.css';
 import bootstrap from 'bootstrap-webpack';
 import material from 'bootstrap-material-design';
 import materialCss from 'bootstrap-material-design/dist/css/bootstrap-material-design.min.css';
@@ -20,7 +22,7 @@ import AppComponent from './app.component';
 import Common from './common/common';
 import Components from './components/components';
 import Services from './services/services';
-import { JwtOptionConfig, routesMiddleware, loadingBarConfig } from './app.config';
+import { JwtOptionConfig, routesMiddleware, loadingBarConfig, toastrConfig } from './app.config';
 
 const root = angular.module('app', [
     uiRouter,
@@ -28,7 +30,7 @@ const root = angular.module('app', [
     angularUIBootstrap,
     'angular-loading-bar',
     'cfp.loadingBarInterceptor',
-
+    'toastr',
     Common,
     Services,
     Components
@@ -36,6 +38,7 @@ const root = angular.module('app', [
     .component('app',AppComponent)
     .config(JwtOptionConfig)
     .config(loadingBarConfig)
+    .config(toastrConfig)
     .run(routesMiddleware)
     .name;
 

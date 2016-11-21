@@ -24,10 +24,9 @@ export default class CuentasEditController {
 
 	save({ data }) {
 		const cuentasData = {
-			name: data.name,
+            full_name: data.name,
 			email: data.email,
-			level: data.level,
-			password: 'pass',
+			level: data.level
 		};
 
 		const operation = data._id ? cuentas.edit(data._id, cuentasData)

@@ -1,6 +1,7 @@
 'use strict';
 
 let User = require('./user.model').User;
+const claveDefecto = config.DEFAULT_PASSWORD || '12345';
 
 // Get list of User
 exports.index = function (req, res) {
@@ -14,14 +15,16 @@ exports.index = function (req, res) {
 
 // Get a single user
 exports.show = function (req, res) {
-    User.findById(req.params.userId, function (err, user) {
+    User.findById(req.params.userId).select('+cuenta.username').exec()
+        .then((user) => {
+            if (!user) {
+                return res.status(404).send('Not Found');
+            }
+            return res.status(200).json(user);
+        }).catch(err => {
         if (err) {
             return handleError(res, err);
         }
-        if (!user) {
-            return res.status(404).send('Not Found');
-        }
-        return res.status(200).json(user);
     });
 
 };
@@ -30,11 +33,10 @@ exports.createLocalAccount = (req, res) => {
     const request = req.body;
     let local = {
         username: request.username || undefined,
-        password: request.password
+        password: request.password || claveDefecto
     };
-    console.log(request);
     let user = new User({
-        full_name: request.name,
+        full_name: request.full_name,
         email: request.email,
         level: request.level,
         local: local

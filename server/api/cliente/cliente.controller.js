@@ -45,7 +45,7 @@ exports.create = function (req, res) {
         if (err) {
             return handleError(res, err);
         }
-        cliente.user_id = user._id;
+        cliente.id_user = user._id;
         cliente.save((err, cliente) => {
             if (err) {
                 return handleError(res, err);
@@ -67,12 +67,13 @@ exports.update = function (req, res) {
         if (!cliente) {
             return res.status(404).send('Not Found');
         }
-        let updated = _.merge(cliente, req.body);
-        updated.save(function (err) {
+        let updated = _.merge(cliente, req.body.datos_basicos);
+        updated = Object.assign({},cliente, updated, req.body);
+        updated.save(function (err,client) {
             if (err) {
                 return handleError(res, err);
             }
-            return res.status(200).json(cliente);
+            return res.status(200).json(client);
         });
     });
 };
@@ -85,12 +86,12 @@ exports.destroy = function (req, res) {
         if (!cliente) {
             return res.status(404).send('Not Found');
         }
-        User.findById(cliente.user_id, (err, user) => {
+        User.findById(cliente.id_user, (err, user) => {
             if (err) {
                 return handleError(res, err);
             }
             if (!user) {
-                return res.status(404).send('Not Found');
+                return res.status(404).send('Not Found User');
             }
             cliente.remove(function (err) {
                 user.remove();

@@ -21,9 +21,13 @@ let clientesModule = angular.module('clientes', [
             .state('clientes', {
                 url: '/i/clientes',
                 component: 'clientes',
+                params: {
+                    data: null
+                },
                 data: {requiresLogin: true, level: ['admin', 'empleado']},
                 resolve: {
-                    data: ['ClientesService',function (ClientesService) {
+                    data: ['$stateParams', 'ClientesService',function ($stateParams, ClientesService) {
+                        if ($stateParams.data) return $stateParams.data;
                         return ClientesService.get().then(data => data);
                     }],
                 }

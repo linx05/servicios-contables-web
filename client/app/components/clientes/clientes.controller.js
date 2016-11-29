@@ -12,18 +12,13 @@ class ClientesController {
 
     }
     $onChanges (changes) {
-        if(changes.data){
-            this.clientes = this.data = this.filter(this.data);
-        }
-    }
-    filter(data) {
-        return data;
+        this.clientes = this.data;
     }
 
     filterClientes() {
         if (this.filterSearch.length < 1) this.clientes = this.data;
         else {
-            this.clientes = this.data.filter(cliente => {
+            this.clientes =_.filter(this.data, cliente => {
                 return cliente.rfc.toLowerCase().includes(this.filterSearch.toLowerCase());
             });
         }
@@ -32,7 +27,7 @@ class ClientesController {
     add (cuenta = null) {
         this.modalOptions.data = cuenta;
         return this.modal.show(this.modalOptions)
-            .then(() => this.clientesService.get().then(data => this.data = this.filter(data)));
+            .then(() => this.clientesService.get().then(data => this.clientes = this.data = data));
     }
 
     edit({ data }) {
@@ -44,7 +39,7 @@ class ClientesController {
 
     delete({ data }) {
         this.clientesService.remove(data._id)
-            .then(() => this.clientesService.get().then(data => this.data = this.filter(data)));
+            .then(() => this.clientesService.get().then(data => this.clientes = this.data = data));
 
     }
 }

@@ -1,0 +1,7 @@
+<div layout="row" layout-align="start center" layout-wrap>
+	<div flex-xs="100" flex-sm="33" flex-md="25" flex-lg="25" flex-xl="20"
+		ng-repeat="<%= name %> in $ctrl.data track by <%= name %>._id">
+		<<%= name %>-item data="<%= name %>" on-select="$ctrl.selectItem($event)"
+			on-delete="$ctrl.deleteItem($event)"></<%= name %>-item>
+	</div>
+</div>

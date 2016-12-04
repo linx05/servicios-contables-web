@@ -1,0 +1,7 @@
+<div layout="row" layout-align="start center" layout-wrap>
+	<div flex-xs="100" flex-sm="33" flex-md="25" flex-lg="25" flex-xl="20"
+		ng-repeat="documentos in $ctrl.data track by documentos._id">
+		<documentos-item data="documentos" on-select="$ctrl.selectItem($event)"
+			on-delete="$ctrl.deleteItem($event)"></documentos-item>
+	</div>
+</div>

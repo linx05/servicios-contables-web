@@ -2,7 +2,7 @@
 
 let User = require('./pago.model.js').User;
 
-// Get list of User
+// Get list of Documento
 exports.index = function (req, res) {
     User.find(function (err, users) {
         if (err) {

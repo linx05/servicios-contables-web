@@ -22,7 +22,7 @@ LocalAccountSchema.statics.validateAccount = function ({username, password}) {
             }
         }).exec()
         .then(()=> {
-            return reject('User Exists');
+            return reject('Documento Exists');
         })
         .catch((err) => {
             return resolve();

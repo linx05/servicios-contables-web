@@ -8,6 +8,7 @@ import DatosForm from './admin/datosForm';
 import Cliente from './cliente';
 import Clientes from './clientes';
 import Cuentas from './cuentas';
+import Documentos from './documentos';
 
 let componentModule = angular.module('app.components', [
     Login,
@@ -18,6 +19,7 @@ let componentModule = angular.module('app.components', [
     Empleado,
     User,
     Home,
+    Documentos,
     DatosForm
 ])
     .name;

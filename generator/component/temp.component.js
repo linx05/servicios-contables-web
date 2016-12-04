@@ -1,10 +1,13 @@
-import template from './<%= name %>.html';
 import controller from './<%= name %>.controller';
-import './<%= name %>.css';
+import template from './<%= name %>.html';
 
-let <%= name %>Component = {
-  template,
-  controller
+const <%= upName %>Component = {
+	bindings: {
+		<%= name %>: '<',
+		data: '<',
+	},
+	controller,
+	template
 };
 
-export default <%= name %>Component;
+export default <%= upName %>Component;

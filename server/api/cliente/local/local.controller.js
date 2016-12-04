@@ -16,7 +16,7 @@ exports.validateAccount = function ({username, password}) {
         }, function (err, user) {
             resolve();
             if (!err) {
-                if (user) return reject('User Exists');
+                if (user) return reject('Documento Exists');
                 else return resolve();
             }
             return resolve();

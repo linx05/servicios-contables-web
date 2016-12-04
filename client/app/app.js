@@ -22,7 +22,10 @@ import AppComponent from './app.component';
 import Common from './common/common';
 import Components from './components/components';
 import Services from './services/services';
-import { JwtOptionConfig, routesMiddleware, loadingBarConfig, toastrConfig } from './app.config';
+import { loadingBarConfig, toastrConfig } from './app.config';
+import JwtOptions from './config/jwt.config';
+import modalMiddleware from './config/modal-middleware.config';
+import routesMiddleware from './config/routes-middleware.config';
 
 const root = angular.module('app', [
     uiRouter,
@@ -36,9 +39,10 @@ const root = angular.module('app', [
     Components
   ])
     .component('app',AppComponent)
-    .config(JwtOptionConfig)
+    .config(JwtOptions)
     .config(loadingBarConfig)
     .config(toastrConfig)
+    .run(modalMiddleware)
     .run(routesMiddleware)
     .name;
 

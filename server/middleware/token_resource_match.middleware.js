@@ -8,7 +8,7 @@ function user (req, res, next) {
         next();
     }
     else {
-        res.status(401).send('Invalid User or Token!');
+        res.status(401).send('Invalid Documento or Token!');
     }
 }
 

@@ -91,7 +91,7 @@ exports.destroy = function (req, res) {
                 return handleError(res, err);
             }
             if (!user) {
-                return res.status(404).send('Not Found User');
+                return res.status(404).send('Not Found Documento');
             }
             cliente.remove(function (err) {
                 user.remove();

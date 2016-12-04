@@ -3,7 +3,7 @@
 let User = require('./user.model').User;
 const claveDefecto = config.DEFAULT_PASSWORD || '12345';
 
-// Get list of User
+// Get list of Documento
 exports.index = function (req, res) {
     User.find(function (err, users) {
         if (err) {

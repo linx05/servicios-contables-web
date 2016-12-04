@@ -1,0 +1,18 @@
+<md-card>
+	<md-card-title>
+		<md-card-title-text>
+			<span class="md-headline">{{ 'documentos.index.title' | translate }}</span>
+			<span class="md-subhead">{{ 'documentos.index.description' | translate }}</span>
+		</md-card-title-text>
+	</md-card-title>
+
+	<md-card-content>
+		<div layout="row">
+			<md-button type="text" class="md-raised md-primary" ng-click="$ctrl.edit()">
+				{{ 'documentos.index.add' | translate }}
+			</md-button>
+		</div>
+		<documentos-list data="$ctrl.data" on-select-item="$ctrl.findAndEdit($event)"
+			on-delete-item="$ctrl.remove($event)"></documentos-list>
+	</md-card-content>
+</md-card>

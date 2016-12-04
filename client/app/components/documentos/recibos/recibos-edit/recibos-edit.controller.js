@@ -24,15 +24,21 @@ export default class recibosEditController {
 	}
 
 	save({ data }) {
+	    let recibo = _.reduce(data.concepto,(obj, producto)=> {
+	        obj.subtotal += producto.precio;
+	        obj.iva += (producto.precio * (producto.iva / 100));
+	        obj.total += producto.precio + (producto.precio * (producto.iva / 100));
+	        return obj;
+        },{total:0,subtotal:0,iva:0});
 		const recibosData = {
-            datos_basicos: {
-                rfc: data.rfc,
-                razon_social: data.razon_social,
-                domicilio: data.domicilio,
-            },
-            contacto: data.contacto,
-            esquema_pago: data.esquema_pago,
-            perfil: data.perfil
+		    tipo: 'recibo',
+            recibo: {
+                subtotal: recibo.subtotal,
+                iva: recibo.iva,
+                total: recibo.total,
+                cliente: this.data.cliente._id,
+                productos: data.concepto
+            }
 		};
 		const operation = data._id ? documentos.edit(data._id, recibosData)
 								   : documentos.add(recibosData);

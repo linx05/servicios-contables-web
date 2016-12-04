@@ -1,91 +1,125 @@
-'use strict';
+const aqp = require('api-query-params');
+const Documento = require('./documento.model').Documento;
+const Pago = require('./pago.model').Pago;
+const Recibo = require('./recibo.model').Recibo;
 
-let Documento = require('./documento.model.js').Documento;
+function index (req, res) {
+    req = handleRequest(req);
+    const query = aqp.default(req.query);
 
-// Get list of Documento
-exports.index = function (req, res) {
-    Documento.find(function (err, users) {
+    Documento.find(query.filter)
+        .populate('user freight from to')
+        .skip(query.skip)
+        .limit(query.limit)
+        .sort(query.sort)
+        .exec((err, data) => {
+            if (err) {
+                return handleError(res, err);
+            }
+
+            return res.status(200).json(data);
+        });
+}
+
+function show (req, res) {
+    Documento.findById(req.params.id)
+        .populate('user freight from to')
+        .exec(function (err, data) {
+            if (err) {
+                return handleError(res, err);
+            }
+
+            if (!data) {
+                return res.status(404).send('Not Found');
+            }
+
+            return res.json(data);
+        });
+}
+
+function create (req, res) {
+    const data = req.body;
+
+    return Documento.create({
+        tipo: data.tipo,
+        fecha_generacion: Date.now(),
+        pago: data.pago,
+        recibo: data.recibo
+    }).then(data => {
+        if (data) return res.status(201).json(data);
+        else return handleError(res, null);
+    }).catch(err => handleError(res, err));
+}
+
+function update (req, res) {
+    if (req.body._id) delete req.body._id;
+
+    Documento.findById(req.params.id, function (err, documento) {
         if (err) {
             return handleError(res, err);
         }
-        return res.status(200).json(users);
-    });
-};
 
-// Get a single user
-exports.show = function (req, res) {
-    Documento.findById(req.params.userId, function (err, user) {
-        if (err) {
-            return handleError(res, err);
-        }
-        if (!user) {
+        if (!documento) {
             return res.status(404).send('Not Found');
         }
-        return res.json(user);
-    });
-};
 
-exports.create = (req, res) => {
-    const request = req.body;
-    let local = {
-        username: request.username || undefined,
-        password: request.password
-    };
-    let user = new Documento({
-        full_name: request.name,
-        email: request.email,
-        level: 'user',
-        local: local
-    });
-    if (request.hasOwnProperty('interpreter')) {
-        user.interpreter = {}
-    }
-    return user.save(function (err, user) {
-        if (!err) return res.status(201).json(user);
-        return handleError(res, err, 422);
-    });
-};
+        delete req.body.events;
+        let updated = Object.assign(documento, req.body);
 
-// Updates an existing user in the DB.
-exports.update = function (req, res) {
-    if (req.body._id) {
-        delete req.body._id;
-    }
-    Documento.findById(req.params.id, function (err, user) {
-        if (err) {
-            return handleError(res, err);
-        }
-        if (!user) {
-            return res.status(404).send('Not Found');
-        }
-        var updated = _.merge(user, req.body);
         updated.save(function (err) {
             if (err) {
                 return handleError(res, err);
             }
-            return res.status(200).json(user);
+            return res.status(200).json(documento);
         });
     });
-};
+}
 
-// Deletes a user from the DB.
-exports.destroy = function (req, res) {
-    Documento.findById(req.params.id, function (err, user) {
+function destroy (req, res) {
+    Documento.findById(req.params.id, function (err, documento) {
         if (err) {
             return handleError(res, err);
         }
-        if (!user) {
+        if (!documento) {
             return res.status(404).send('Not Found');
         }
-        user.remove(function (err) {
+        documento.remove(function (err) {
             if (err) {
                 return handleError(res, err);
             }
             return res.status(204).send('No Content');
         });
     });
-};
+}
 
-function handleError (res, err, code = 500) {
+function getError (name) {
+    const error = {message: '', name: 'ValidationError', errors: {}};
+
+    if (name === 'user') {
+        error.message = 'User level invalid';
+        error.errors = {user: {}};
+    }
+    else if (name === 'freight') {
+        error.message = 'Documento box is unavailable';
+        error.errors = {freight: {}};
+    }
+
+    return error;
+}
+
+function handleError (res, err, code = 400) {
     return res.status(code).send(err);
 }
+
+function handleRequest (req) {
+    if (req.user.level === 'user') {
+        req.query.user = req.user._id;
+    }
+    return req;
+}
+
+function noop () {
+
+}
+
+module.exports = {index, show, create, update, destroy};

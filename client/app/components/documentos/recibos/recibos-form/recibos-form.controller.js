@@ -38,14 +38,9 @@ class RecibosFormController {
     }
 
     onSubmit () {
-        if (form.$invalid) return form.$setSubmitted();
         this.onSave({
             $event: {data: this.data}
         });
-    }
-
-    setForm (f) {
-        form = f;
     }
 }
 RecibosFormController.$inject = [];

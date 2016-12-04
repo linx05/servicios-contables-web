@@ -1,6 +1,7 @@
 'use strict';
 
 let uniqueValidator = require('mongoose-unique-validator');
+const productoSchema = require('./producto.model').ProductoSchema;
 let Schema = mongoose.Schema;
 
 mongoose.plugin(uniqueValidator);
@@ -26,6 +27,7 @@ let reciboSchema = new Schema({
         ref : 'Cliente',
         required: true
     },
+    productos: [productoSchema]
 
 }, {
     timestamps: {

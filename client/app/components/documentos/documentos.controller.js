@@ -4,8 +4,12 @@ export default class DocumentosController {
         'ngInject';
         this.documentosService = DocumentosService;
         this.modal = ModalService;
-        this.modalOptions = {
+        this.modalOptionsRecibo = {
             component: '<recibos-edit></recibos-edit>',
+            title: 'Recibo'
+        };
+        this.modalOptionsPago = {
+            component: '<pagos-edit></pagos-edit>',
             title: 'Recibo'
         };
     }
@@ -33,10 +37,13 @@ export default class DocumentosController {
     }
 
     add (type) {
-        this.modalOptions.data = {
+        this.modalToShow = this.modalOptionsRecibo;
+        if(type == 'pago') this.modalToShow = this.modalOptionsPago;
+
+        this.modalToShow.data = {
             cliente: this.selectedClient
         };
-        return this.modal.show(this.modalOptions)
+        return this.modal.show(this.modalToShow)
             .then(() => this.clientesService.get().then(data => data));
     }
 

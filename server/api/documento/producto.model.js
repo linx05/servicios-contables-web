@@ -10,12 +10,9 @@ let productoSchema = new Schema({
         type: Number,
         required: true
     },
-    producto: {
+    concepto: {
         type: String,
         required: true
-    },
-    medidida: {
-        type: String
     },
     precio: {
         type: Number,

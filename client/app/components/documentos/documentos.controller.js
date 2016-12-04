@@ -1,40 +1,59 @@
-let documentosService, modal, modalOptions;
-
 export default class DocumentosController {
 
-	constructor(DocumentosService, ModalService) {
-		'ngInject';
-		documentosService = DocumentosService;
-		modal          = ModalService;
-		modalOptions   = {
-			component: '<documentos-edit></documentos-edit>',
-			title: 'Generacion de Documentos Electronicos',
-			data: {},
-			state: 'documentos',
-			stateParams: { data: this.data },
-		};
-	}
+    constructor (DocumentosService, ModalService) {
+        'ngInject';
+        this.documentosService = DocumentosService;
+        this.modal = ModalService;
+        this.modalOptions = {
+            component: '<recibos-edit></recibos-edit>',
+            title: 'Recibo'
+        };
+    }
 
-	$onInit() {
-		if (this.documentos) {
-			this.edit(this.documentos);
-		}
-	}
+    $onChanges (changes) {
+        this.clientes = this.data.clientes;
+        this.documentos = this.data.documentos;
+    }
 
-	edit(documentos = {}) {
-		modalOptions.data           = documentos;
-		modalOptions.stateParams.id = documentos._id ? documentos._id : 'add';
-		modal.show(modalOptions);
-	}
+    $onInit () {
+    }
 
-	findAndEdit({ data }) {
-		documentosService.find(data._id).then(data => this.edit(data));
-	}
+    select ({data}) {
+        this.selectedClient = data;
+        this.enableAdd = true;
+    }
 
-	remove({ data }) {
-		modalOptions.id = data._id;
-		modalOptions.service = documentosService;
-		modal.warn(modalOptions);
-	}
+    filterClientes() {
+        if (this.filterSearch.length < 1) this.clientes = this.data.clientes;
+        else {
+            this.clientes =_.filter(this.data.clientes, cliente => {
+                return cliente.rfc.toLowerCase().includes(this.filterSearch.toLowerCase());
+            });
+        }
+    }
+
+    add (type) {
+        this.modalOptions.data = {
+            cliente: this.selectedClient
+        };
+        return this.modal.show(this.modalOptions)
+            .then(() => this.clientesService.get().then(data => data));
+    }
+
+    edit (documentos = {}) {
+        this.modalOptions.data = documentos;
+        this.modalOptions.stateParams.id = documentos._id ? documentos._id : 'add';
+        this.modal.show(modalOptions);
+    }
+
+    findAndEdit ({data}) {
+        this.documentosService.find(data._id).then(data => this.edit(data));
+    }
+
+    remove ({data}) {
+        this.modalOptions.id = data._id;
+        this.modalOptions.service = this.documentosService;
+        this.modal.warn(modalOptions);
+    }
 
 }

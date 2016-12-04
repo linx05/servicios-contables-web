@@ -1,18 +1,17 @@
-<md-card>
-	<md-card-title>
-		<md-card-title-text>
-			<span class="md-headline">{{ 'documentos.index.title' | translate }}</span>
-			<span class="md-subhead">{{ 'documentos.index.description' | translate }}</span>
-		</md-card-title-text>
-	</md-card-title>
+<div class="row">
+    <div class="col-sm-12">
+        <input id="filter" type="text" class="form-control"
+               placeholder="Busqueda"
+               ng-model="$ctrl.filterSearch"
+               ng-change="$ctrl.filterClientes()">
+        <a class="btn btn-raised btn-success pull-right" ng-disabled="!$ctrl.enableAdd"
+                ng-click="$ctrl.add('recibo')">Recibo <span class="glyphicon glyphicon-plus-sign"></span></a>
+        <a class="btn btn-raised btn-success pull-right" ng-disabled="!$ctrl.enableAdd"
+                ng-click="$ctrl.add('pago')">Pago <span class="glyphicon glyphicon-plus-sign"></span></a>
+    </div>
+    <div class="col-sm-12">
+        <clientes-documentos-list clientes="$ctrl.clientes" on-select-item="$ctrl.select($event)">
+        </clientes-documentos-list>
+    </div>
+</div>
 
-	<md-card-content>
-		<div layout="row">
-			<md-button type="text" class="md-raised md-primary" ng-click="$ctrl.edit()">
-				{{ 'documentos.index.add' | translate }}
-			</md-button>
-		</div>
-		<documentos-list data="$ctrl.data" on-select-item="$ctrl.findAndEdit($event)"
-			on-delete-item="$ctrl.remove($event)"></documentos-list>
-	</md-card-content>
-</md-card>

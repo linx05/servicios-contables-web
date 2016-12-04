@@ -1,10 +1,10 @@
 let documentos;
 
-export default class DocumentosEditController {
+export default class recibosEditController {
 
 	constructor(DocumentosService) {
-		'ngInject';
-	documentos = DocumentosService;
+	    'ngInject';
+		documentos = DocumentosService;
 	}
 
 	$onInit() {
@@ -24,13 +24,18 @@ export default class DocumentosEditController {
 	}
 
 	save({ data }) {
-		const documentosData = {
-			name: data.name,
-			email: data.email
+		const recibosData = {
+            datos_basicos: {
+                rfc: data.rfc,
+                razon_social: data.razon_social,
+                domicilio: data.domicilio,
+            },
+            contacto: data.contacto,
+            esquema_pago: data.esquema_pago,
+            perfil: data.perfil
 		};
-
-		const operation = data._id ? documentos.edit(data._id, documentosData)
-								   : documentos.add(adocumentosData);
+		const operation = data._id ? documentos.edit(data._id, recibosData)
+								   : documentos.add(recibosData);
 
 		this.error = false;
 		this.onToggle();
@@ -40,5 +45,4 @@ export default class DocumentosEditController {
 			.catch(error => this.error = true)
 			.finally(() => this.onToggle());
 	}
-
 }

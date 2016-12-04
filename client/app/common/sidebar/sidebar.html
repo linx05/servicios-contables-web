@@ -13,6 +13,9 @@
             <li class="active" ng-hide="$ctrl.level === 'cliente'">
                 <a href="#" ui-sref="clientes">Clientes</a>
             </li>
+            <li class="" ng-show="$ctrl.level === 'empleado' || $ctrl.level === 'admin'">
+                <a href="#" ui-sref="documentos">Documentos</a>
+            </li>
             <li class="" ng-show="$ctrl.level === 'admin'">
                 <a href="#" ui-sref="cuentas">Empleados</a>
             </li>

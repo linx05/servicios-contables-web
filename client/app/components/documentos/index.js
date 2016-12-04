@@ -1,17 +1,16 @@
 import angular from 'angular';
 import DocumentosService from './documentos.service';
-import DocumentosForm from './documentos-form';
-import DocumentosEdit from './documentos-edit';
-import DocumentosItem from './documentos-item';
 import DocumentosList from './documentos-list';
+import ClienteDocumentosList from './documentos-clientes-list';
 import Documentos from './documentos.component';
+
+import Recibos from './recibos';
 
 const documentos = angular
 	.module('documentos', [
-		DocumentosForm,
-		DocumentosEdit,
-		DocumentosItem,
 		DocumentosList,
+        ClienteDocumentosList,
+        Recibos
 	])
 	.service('DocumentosService', DocumentosService)
 	.component('documentos', Documentos)
@@ -31,10 +30,18 @@ const documentos = angular
 					level: ['admin','employee']
 				},
 				resolve: {
-					data: function ($stateParams, DocumentosService) {
+					data: function ($stateParams, DocumentosService, ClientesService) {
 						'ngInject';
 						if ($stateParams.data) return $stateParams.data;
-						return DocumentosService.get().then(data => data);
+						return DocumentosService.get().then(documentos => {
+                            return ClientesService.get().then(clientes => {
+                                return {
+                                    clientes,
+                                    documentos
+                                }
+                            });
+                        });
+
 
 					},
 					documentos: function ($stateParams, DocumentosService) {

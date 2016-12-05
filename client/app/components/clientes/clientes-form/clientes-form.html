@@ -35,21 +35,21 @@
         <input class="btn btn-default btn-raised" type="submit" wz-next value="Continuar" ng-click="$ctrl.checkStep()"/>
     </wz-step>
     <wz-step wz-title="Perfil" class="form">
-        <div ng-repeat="noPerfil in $ctrl.repeatConcepto">
+        <div ng-repeat="(i, noPerfil) in $ctrl.repeatPerfil track by $index">
             <div class="form-group">
-                <label for="regimen_fiscal">Regimen Fiscal {{noPerfil+1}}</label>
+                <label for="regimen_fiscal">Regimen Fiscal {{i+1}}</label>
                 <input id="regimen_fiscal" class="form-control" type="text"
-                       ng-model="$ctrl.data.perfil[noPerfil].regimen_fiscal">
+                       ng-model="$ctrl.data.perfil[i].regimen_fiscal">
             </div>
             <div class="form-group">
-                <label for="actividad_principal">Actividad Principal {{noPerfil+1}}</label>
+                <label for="actividad_principal">Actividad Principal {{i+1}}</label>
                 <input id="actividad_principal" class="form-control" type="text"
-                       ng-model="$ctrl.data.perfil[noPerfil].actividad_principal">
+                       ng-model="$ctrl.data.perfil[i].actividad_principal">
             </div>
         </div>
         <input class="btn btn-default btn-raised" type="submit" wz-next value="Continuar" ng-click="$ctrl.checkStep()"/>
-        <button class="btn btn-primary btn-raised" ng-click="$ctrl.addConcepto()">Agregar Perfil</button>
-        <button class="btn btn-warning btn-raised" ng-click="$ctrl.removeConcepto()">Quitar Perfil</button>
+        <button class="btn btn-primary btn-raised" ng-click="$ctrl.addPerfil()">Agregar Perfil</button>
+        <button class="btn btn-warning btn-raised" ng-click="$ctrl.removePerfil()">Quitar Perfil</button>
     </wz-step>
     <wz-step wz-title="Esquema de Pago" class="form">
         <div class="form-group">

@@ -4,11 +4,12 @@ class ClientesFormController {
 
     constructor(WizardHandler) {
         this.wizard = WizardHandler;
-        this.repeatConcepto = [0];
+        this.repeatPerfil = [0];
         this.periocidad = ['mensual', 'bimestral', 'trimestral', 'cuatrimestral', 'semestral', 'anual'];
     }
 
     $onInit() {
+        this.repeatPerfil = [0];
     }
 
     $onChanges(changes) {
@@ -18,7 +19,6 @@ class ClientesFormController {
             _.forEach(this.data.perfil,()=>{
                 this.addPerfil();
             });
-            this.repeatConcepto.pop();
         }
 
         if (changes.event) {
@@ -28,10 +28,11 @@ class ClientesFormController {
     }
 
     addPerfil() {
-        this.repeatConcepto.push(this.repeatConcepto.length);
+        this.repeatPerfil.push(this.repeatPerfil.length);
     }
 
     checkStep() {
+        this.canSubmit = true;
         let currentStep = this.wizard.wizard().currentStepNumber();
         let totalSteps  = this.wizard.wizard().totalStepCount();
         if(currentStep === totalSteps) {
@@ -40,8 +41,8 @@ class ClientesFormController {
     }
 
     removePerfil() {
-        if (this.repeatConcepto.length>1) {
-            this.repeatConcepto.pop();
+        if (this.repeatPerfil.length>1) {
+            this.repeatPerfil.pop();
             this.data.perfil.pop();
         }
     }

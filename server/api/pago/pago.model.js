@@ -5,22 +5,14 @@ let Schema = mongoose.Schema;
 
 mongoose.plugin(uniqueValidator);
 
-let schemaPagoSchema = new Schema({
+let pagoSchema = new Schema({
     total: {
         type: Number,
         required: true
     },
-    periocidad_valor: {
-        type: Number,
-        required: true
-    },
-    periocidad_rango: {
-        type: String,
-        required: true,
-        enum: ['mensual', 'bimestral', 'trimestral', 'cuatrimestral', 'semestral', 'anual']
-    },
-    fecha_generacion: {
-        type: Date,
+    recibo: {
+        type: Schema.ObjectId,
+        ref: 'Pago',
         required: true
     }
 }, {
@@ -31,6 +23,6 @@ let schemaPagoSchema = new Schema({
 });
 
 module.exports = {
-    User: mongoose.model('Pago', schemaPagoSchema),
-    UserSchema: schemaPagoSchema
+    Pago: mongoose.model('Pago', pagoSchema),
+    PagoSchema: pagoSchema
 };

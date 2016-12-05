@@ -1,7 +1,5 @@
 const aqp = require('api-query-params');
 const Documento = require('./documento.model').Documento;
-const Pago = require('./pago.model').Pago;
-const Recibo = require('./recibo.model').Recibo;
 
 function index (req, res) {
     req = handleRequest(req);
@@ -116,10 +114,6 @@ function handleRequest (req) {
         req.query.user = req.user._id;
     }
     return req;
-}
-
-function noop () {
-
 }
 
 module.exports = {index, show, create, update, destroy};

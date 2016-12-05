@@ -1,13 +1,12 @@
 const aqp = require('api-query-params');
 const Documento = require('../documento/documento.model').Documento;
-const Pago = require('./pago.model').Pago;
-const Recibo = require('../recibo/recibo.model').Recibo;
+const Recibo = require('./recibo.model').Recibo;
 
 function index (req, res) {
     req = handleRequest(req);
     const query = aqp.default(req.query);
 
-    Documento.find(query.filter)
+    Recibo.find(query.filter)
         .populate('user freight from to')
         .skip(query.skip)
         .limit(query.limit)
@@ -39,25 +38,16 @@ function show (req, res) {
 
 function create (req, res) {
     const data = req.body;
-    let pag;
-    return Pago.create(Object.assign({},data))
-        .then(pago => {
-            if (!pago) return handleError(res, null);
-            pag = pago;
-            return Recibo.findById(pago.recibo).exec()
-        })
+    let rec;
+    return Recibo.create(Object.assign({},data))
         .then(recibo => {
-            recibo.saldo_pendiente -= pag.total;
-            if(recibo.saldo_pendiente < 1) recibo.pagado = true;
-            recibo.pagos.push(pag._id);
-            return recibo.save();
-        })
-        .then(data => {
+            if (!recibo) return handleError(res, null);
+            rec = recibo;
             return Documento.create({
-                tipo: 'pago',
+                tipo: 'recibo',
                 fecha_generacion: Date.now(),
-                pago: pag._id
-            });
+                recibo: recibo._id
+            })
         })
         .then(data => {
             if (data) return res.status(201).json(data);
@@ -123,7 +113,6 @@ function getError (name) {
 }
 
 function handleError (res, err, code = 400) {
-    console.log(err);
     return res.status(code).send(err);
 }
 

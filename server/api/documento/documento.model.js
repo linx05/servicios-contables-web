@@ -1,8 +1,6 @@
 'use strict';
 
 let uniqueValidator = require('mongoose-unique-validator');
-const reciboSchema = require('./recibo.model').ReciboSchema;
-const pagoSchema = require('./pago.model').PagoSchema;
 let Schema = mongoose.Schema;
 
 mongoose.plugin(uniqueValidator);
@@ -17,8 +15,14 @@ let documentoSchema = new Schema({
         type: Date,
         required: true
     },
-    pago: reciboSchema,
-    recibo: reciboSchema
+    pago: {
+        type: Schema.ObjectId,
+        ref: 'Pago'
+    },
+    recibo: {
+        type: Schema.ObjectId,
+        ref: 'Recibo'
+    }
 
 
 }, {

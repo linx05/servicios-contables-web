@@ -30,3 +30,4 @@ body {
     background: GhostWhite !important;
     height: 4px !important;
 }
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }

@@ -17,6 +17,10 @@ let reciboSchema = new Schema({
         type: Number,
         required: true
     },
+    saldo_pendiente: {
+        type: Number,
+        required: true
+    },
     pagado: {
         type: Boolean,
         required: true,
@@ -27,6 +31,10 @@ let reciboSchema = new Schema({
         ref : 'Cliente',
         required: true
     },
+    pagos: [{
+        type: Schema.ObjectId,
+        ref : 'Pago'
+    }],
     productos: [productoSchema]
 
 }, {

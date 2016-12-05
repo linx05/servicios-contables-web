@@ -34,6 +34,6 @@ let productoSchema = new Schema({
 });
 
 module.exports = {
-    User: mongoose.model('Producto', productoSchema),
+    Producto: mongoose.model('Producto', productoSchema),
     ProductoSchema: productoSchema
 };

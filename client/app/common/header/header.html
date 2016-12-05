@@ -12,6 +12,27 @@
 		</div>
 
 		<div class="navbar-collapse collapse navbar-responsive-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active" ng-hide="$ctrl.level === 'cliente'">
+                    <a href="#" ui-sref="clientes">Clientes</a>
+                </li>
+                <li class="" ng-show="$ctrl.level === 'empleado' || $ctrl.level === 'admin'">
+                    <a href="#" ui-sref="documentos">Documentos</a>
+                </li>
+                <li uib-dropdown class="" ng-show="$ctrl.level === 'empleado' || $ctrl.level === 'admin'">
+                    <a href="#" uib-dropdown-toggle>Documentos <b class="caret"></b></a>
+                    <ul class="dropdown-menu" uib-dropdown-menu role="menu">
+                        <li><a href="#" ui-sref="documentos">Crear Documentos</a></li>
+                        <li><a href="#" ui-sref="documentos">Documentos Emitidos</a></li>
+                    </ul>
+                </li>
+                <li class="" ng-show="$ctrl.level === 'admin'">
+                    <a href="#" ui-sref="cuentas">Empleados</a>
+                </li>
+                <li class="">
+                    <a ui-sref="home">Estados de Cuenta</a>
+                </li>
+            </ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
 					<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"

@@ -5,12 +5,14 @@ import ClienteDocumentosList from './documentos-clientes-list';
 import Documentos from './documentos.component';
 
 import Recibos from './recibos';
+import Pagos from './pagos';
 
 const documentos = angular
 	.module('documentos', [
 		DocumentosList,
         ClienteDocumentosList,
-        Recibos
+        Recibos,
+        Pagos
 	])
 	.service('DocumentosService', DocumentosService)
 	.component('documentos', Documentos)

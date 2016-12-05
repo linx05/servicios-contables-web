@@ -1,12 +1,7 @@
-<app-header></app-header>
+<app-header ng-show="$ctrl.isLogged"></app-header>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-3 col-lg-2" ng-show="$ctrl.isLogged">
-            <nav class="navbar navbar-info navbar-fixed-side">
-                <sidebar></sidebar>
-            </nav>
-        </div>
-        <div ng-class="$ctrl.isLogged ? 'col-sm-9 col-lg-10' : 'col-sm-12'">
+        <div ng-class="'col-sm-12'">
             <div ui-view></div>
         </div>
     </div>

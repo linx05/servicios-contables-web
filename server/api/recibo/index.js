@@ -1,6 +1,6 @@
 'use strict';
 
-let controller = require('./pago.controller.js');
+let controller = require('./recibo.controller.js');
 let rolesMiddleware = require('../../middleware/roles.middleware');
 
 let router = express.Router();

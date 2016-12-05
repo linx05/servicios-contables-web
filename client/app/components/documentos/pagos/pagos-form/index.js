@@ -1,8 +1,8 @@
 import angular from 'angular';
-import clientesFormComponent from './clientes-form.component';
+import pagosFormComponent from './pagos-form.component';
 
-let clientesFormModule = angular.module('clientes.form', [])
-    .component('clientesForm', clientesFormComponent)
+let pagosFormModule = angular.module('pagos.form', [])
+    .component('pagosForm', pagosFormComponent)
     .name;
 
-export default clientesFormModule;
+export default pagosFormModule;

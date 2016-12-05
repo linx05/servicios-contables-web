@@ -1,8 +1,11 @@
 export default class DocumentosController {
 
-    constructor (DocumentosService, ModalService) {
+    constructor (DocumentosService, RecibosService, ModalService, toastr) {
         'ngInject';
         this.documentosService = DocumentosService;
+        // this.pagosService = PagosService;
+        this.recibosService = RecibosService;
+        this.toastr = toastr;
         this.modal = ModalService;
         this.modalOptionsRecibo = {
             component: '<recibos-edit></recibos-edit>',
@@ -10,7 +13,7 @@ export default class DocumentosController {
         };
         this.modalOptionsPago = {
             component: '<pagos-edit></pagos-edit>',
-            title: 'Recibo'
+            title: 'Pago'
         };
     }
 
@@ -43,8 +46,24 @@ export default class DocumentosController {
         this.modalToShow.data = {
             cliente: this.selectedClient
         };
-        return this.modal.show(this.modalToShow)
-            .then(() => this.clientesService.get().then(data => data));
+        if(type == 'pago') {
+            this.recibosService.builder
+                .where('pagado', '=', false)
+                .where('cliente', '=', this.selectedClient._id)
+                .build()
+                .then(recibos => {
+                    if(recibos.length>0) {
+                        this.modalToShow.data = Object.assign({},this.modalToShow.data, {recibos});
+                        this.modal.show(this.modalToShow)
+                            .then(() => this.clientesService.get().then(data => data));
+                    }
+                    else {
+                        this.toastr.error('El cliente no tiene ninguna cuenta pendiente!');
+                    }
+                })
+        }
+        else return this.modal.show(this.modalToShow)
+            .then(() => this.documentosService.get().then(data => data));
     }
 
     edit (documentos = {}) {

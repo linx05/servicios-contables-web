@@ -9,13 +9,13 @@ import 'angular-toastr/dist/angular-toastr.tpls.min';
 
 //CSS
 import 'angular-toastr/dist/angular-toastr.min.css';
-import bootstrap from 'bootstrap-webpack';
-import material from 'bootstrap-material-design';
-import materialCss from 'bootstrap-material-design/dist/css/bootstrap-material-design.min.css';
-import ripplesCss from 'bootstrap-material-design/dist/css/ripples.min.css';
-import appCss from './app.css';
-import loadingBarCss from 'angular-loading-bar/build/loading-bar.min.css';
-import loadingBarJs from 'angular-loading-bar/build/loading-bar.min.js';
+import 'bootstrap-webpack';
+import 'bootstrap-material-design';
+import 'bootstrap-material-design/dist/css/bootstrap-material-design.min.css';
+import 'bootstrap-material-design/dist/css/ripples.min.css';
+import './app.css';
+import 'angular-loading-bar/build/loading-bar.min.css';
+import 'angular-loading-bar/build/loading-bar.min.js';
 
 //App
 import AppComponent from './app.component';

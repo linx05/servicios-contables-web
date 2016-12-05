@@ -1,9 +1,9 @@
 import angular from 'angular';
-import clientesEditComponent from './clientes-edit.component';
+import pagosEditComponent from './pagos-edit.component';
 
-const clientesEdit = angular
-	.module('clientes.edit', [])
-	.component('clientesEdit', clientesEditComponent)
+const pagosEdit = angular
+	.module('pagos.edit', [])
+	.component('pagosEdit', pagosEditComponent)
 	.name;
 
-export default clientesEdit;
+export default pagosEdit;

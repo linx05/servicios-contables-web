@@ -1,10 +1,19 @@
-let state, authService;
+let state, authService, transitions;
 
 class HeaderController {
 
-    constructor ($state, AuthenticationService) {
+    constructor ($transitions, $state, AuthService) {
+        transitions = $transitions;
         state = $state;
-        authService = AuthenticationService;
+        authService = AuthService;
+    }
+
+    $onInit() {
+        this.level = authService.getLoginLevel();
+
+        transitions.onSuccess({}, (transition) => {
+            this.level = authService.getLoginLevel();
+        });
     }
 
     getLoginName () {
@@ -33,7 +42,4 @@ class HeaderController {
     }
 
 }
-
-HeaderController.$inject = ['$state', 'AuthService'];
-
 export default HeaderController;

@@ -3,7 +3,7 @@ class ClientesController {
         this.clientesService = ClientesService;
         this.modal = ModalService;
         this.modalOptions = {
-            component: '<pagos-edit></pagos-edit>',
+            component: '<clientes-edit></clientes-edit>',
             title: 'Cliente',
         };
     }

@@ -12,16 +12,18 @@ global.mongoose = require('mongoose');
 global.config = require('./config/environment');
 global._ = require('lodash');
 const bodyParser = require('body-parser');
+const autoIncrement = require('mongoose-auto-increment');
 // Use native promises for mongoose
 mongoose.Promise = global.Promise;
 
 // Connect to database
-mongoose.connect(config.mongo.uri, config.mongo.options);
+const mongooseConnection = mongoose.connect(config.mongo.uri, config.mongo.options);
 mongoose.connection.on('error', function(err) {
 	console.error('MongoDB connection error: ' + err);
 	process.exit(-1);
 	}
 );
+autoIncrement.initialize(mongooseConnection);
 // Populate DB with sample data
 if(config.seedDB) { require('./config/seed'); }
 

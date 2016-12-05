@@ -52,11 +52,12 @@ function create (req, res) {
             recibo.pagos.push(pag._id);
             return recibo.save();
         })
-        .then(data => {
+        .then(recibo => {
             return Documento.create({
                 tipo: 'pago',
                 fecha_generacion: Date.now(),
-                pago: pag._id
+                pago: pag._id,
+                cliente: recibo.cliente
             });
         })
         .then(data => {

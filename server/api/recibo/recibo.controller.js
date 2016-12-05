@@ -46,7 +46,8 @@ function create (req, res) {
             return Documento.create({
                 tipo: 'recibo',
                 fecha_generacion: Date.now(),
-                recibo: recibo._id
+                recibo: recibo._id,
+                cliente: recibo.cliente
             })
         })
         .then(data => {

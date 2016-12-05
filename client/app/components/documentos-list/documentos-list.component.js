@@ -1,14 +1,13 @@
 import controller from './documentos-list.controller';
 import template from './documentos-list.html';
 
-const documentosListComponent = {
+const DocumentosListComponent = {
 	bindings: {
+		documentos: '<',
 		data: '<',
-		onSelectItem: '&',
-		onDeleteItem: '&',
 	},
 	controller,
 	template
 };
 
-export default documentosListComponent;
+export default DocumentosListComponent;

@@ -1,6 +1,5 @@
 import angular from 'angular';
 import DocumentosService from './documentos.service';
-import DocumentosList from './documentos-list';
 import ClienteDocumentosList from './documentos-clientes-list';
 import Documentos from './documentos.component';
 
@@ -9,7 +8,6 @@ import Pagos from './pagos';
 
 const documentos = angular
 	.module('documentos', [
-		DocumentosList,
         ClienteDocumentosList,
         Recibos,
         Pagos

@@ -1,4 +1,4 @@
-export default class DocumentosListController {
+export default class ListDocumentosController {
 
 	constructor() {
 		'ngInject';

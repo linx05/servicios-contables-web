@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="col-sm-6">
+        <input id="filterFolio" type="text" class="form-control"
+               placeholder="Folio"
+               ng-model="$ctrl.filterSearchFolio"
+               ng-change="$ctrl.filterClientes('cfd',$ctrl.filterSearchFolio)">
+    </div>
+    <div class="col-sm-6">
+        <input id="filter" type="text" class="form-control"
+               placeholder="Busqueda por RFC o Razon Social"
+               ng-model="$ctrl.filterSearch"
+               ng-change="$ctrl.filterClientes('rfc',$ctrl.filterSearch)">
+    </div>
+    <div class="col-sm-12">
+        <list-documentos data="$ctrl.documentos">
+        </list-documentos>
+    </div>
+</div>
+

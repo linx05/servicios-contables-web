@@ -6,7 +6,8 @@ import 'angular-socket-io';
 import angularUIBootstrap from 'angular-ui-bootstrap';
 import 'angular-loading-bar';
 import 'angular-toastr/dist/angular-toastr.tpls.min';
-
+import 'moment';
+import 'angular-moment';
 //CSS
 import 'angular-toastr/dist/angular-toastr.min.css';
 import 'bootstrap-webpack';
@@ -34,6 +35,7 @@ const root = angular.module('app', [
     'angular-loading-bar',
     'cfp.loadingBarInterceptor',
     'toastr',
+    'angularMoment',
     Common,
     Services,
     Components

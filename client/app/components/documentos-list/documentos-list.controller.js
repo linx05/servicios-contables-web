@@ -1,9 +1,8 @@
-export default class DocumentosController {
+export default class DocumentosListController {
 
     constructor (DocumentosService, RecibosService, ModalService, toastr) {
         'ngInject';
         this.documentosService = DocumentosService;
-        // this.pagosService = PagosService;
         this.recibosService = RecibosService;
         this.toastr = toastr;
         this.modal = ModalService;
@@ -18,8 +17,7 @@ export default class DocumentosController {
     }
 
     $onChanges (changes) {
-        this.clientes = this.data.clientes;
-        this.documentos = this.data.documentos;
+        this.documentos = this.data;
     }
 
     $onInit () {
@@ -30,12 +28,21 @@ export default class DocumentosController {
         this.enableAdd = true;
     }
 
-    filterClientes() {
-        if (this.filterSearch.length < 1) this.clientes = this.data.clientes;
+    filterClientes(campo, search) {
+        if (search.length < 1) this.documentos = this.data;
         else {
-            this.clientes =_.filter(this.data.clientes, cliente => {
-                return cliente.rfc.toLowerCase().includes(this.filterSearch.toLowerCase());
-            });
+            if (campo == 'cfd'){
+                this.documentos =_.filter(this.data, documento => {
+                    return documento.cfd == search;
+                });
+            }
+            else {
+                this.documentos =_.filter(this.data, documento => {
+                    return documento.cliente.rfc.toLowerCase().includes(search.toLowerCase())
+                        || documento.cliente.razon_social.toLowerCase().includes(search.toLowerCase());
+                });
+            }
+
         }
     }
 
@@ -55,7 +62,7 @@ export default class DocumentosController {
                     if(recibos.length>0) {
                         this.modalToShow.data = Object.assign({},this.modalToShow.data, {recibos});
                         this.modal.show(this.modalToShow)
-                            .then(() => this.documentosService.get().then(data => data));
+                            .then(() => this.clientesService.get().then(data => data));
                     }
                     else {
                         this.toastr.error('El cliente no tiene ninguna cuenta pendiente!');

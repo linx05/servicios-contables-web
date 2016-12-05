@@ -1,6 +1,7 @@
 'use strict';
 
-let uniqueValidator = require('mongoose-unique-validator');
+const uniqueValidator = require('mongoose-unique-validator');
+const autoIncrement = require('mongoose-auto-increment');
 let Schema = mongoose.Schema;
 
 mongoose.plugin(uniqueValidator);
@@ -15,6 +16,10 @@ let documentoSchema = new Schema({
         type: Date,
         required: true
     },
+    cliente: {
+      type: Schema.ObjectId,
+        ref: 'Cliente'
+    },
     pago: {
         type: Schema.ObjectId,
         ref: 'Pago'
@@ -22,15 +27,18 @@ let documentoSchema = new Schema({
     recibo: {
         type: Schema.ObjectId,
         ref: 'Recibo'
+    },
+    cfd : {
+        type: Number
     }
-
-
 }, {
     timestamps: {
         createdAt: 'created_at',
         updatedAt: 'updated_at',
     }
 });
+
+documentoSchema.plugin(autoIncrement.plugin,{model:'Documento',field:'cfd',startAt:1});
 
 module.exports = {
     Documento: mongoose.model('Documento', documentoSchema),

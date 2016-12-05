@@ -6,7 +6,7 @@ function index (req, res) {
     const query = aqp.default(req.query);
 
     Documento.find(query.filter)
-        .populate('user freight from to')
+        .populate('recibo pago cliente')
         .skip(query.skip)
         .limit(query.limit)
         .sort(query.sort)
@@ -21,7 +21,7 @@ function index (req, res) {
 
 function show (req, res) {
     Documento.findById(req.params.id)
-        .populate('user freight from to')
+        .populate('recibo pago cliente')
         .exec(function (err, data) {
             if (err) {
                 return handleError(res, err);

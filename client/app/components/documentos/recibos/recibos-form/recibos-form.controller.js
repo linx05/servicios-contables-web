@@ -11,7 +11,10 @@ class RecibosFormController {
 
     $onChanges (changes) {
         if (changes.data) {
-            this.data = Object.assign({concepto: [{cantidad: 1, iva: 16, precio: 0}]}, this.data);
+            this.data = Object.assign({
+                concepto: [{cantidad: 1, iva: 16, precio: 0}],
+                totales: {total: 0, subtotal: 0, iva: 0}
+            }, this.data);
         }
 
         if (changes.event) {
@@ -35,6 +38,16 @@ class RecibosFormController {
     calcularImporte (index) {
         this.data.concepto[index].importe = +(this.data.concepto[index].precio +
             (this.data.concepto[index].precio * (this.data.concepto[index].iva/100))).toFixed(2);
+        this.calcularTotales();
+    }
+
+    calcularTotales () {
+        this.data.totales = _.reduce(this.data.concepto, (obj, producto) => {
+            obj.subtotal += producto.precio;
+            obj.iva += +(producto.precio * (producto.iva / 100)).toFixed(2);
+            obj.total += producto.precio + (producto.precio * (producto.iva / 100));
+            return obj;
+        }, {total: 0, subtotal: 0, iva: 0});
     }
 
     onSubmit () {

@@ -1,5 +1,4 @@
-<div id="reports">
-    {{$ctrl.data}}
+<div id="recibos-form">
     <div class="row">
         <div class="col-sm-12">
             <table class="table table-striped clickable">
@@ -34,6 +33,23 @@
                 </tr>
                 </tbody>
             </table>
+        </div>
+        <div class="col-sm-4 pull-right">
+            <div class="well-sm">
+                <div class="form-group">
+                    <label for="subtotal">Subtotal</label>
+                    <input type="text" id="subtotal" class="form-control" ng-model="$ctrl.data.totales.subtotal" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="iva">IVA</label>
+                    <input type="text" id="iva" class="form-control" ng-model="$ctrl.data.totales.iva" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="total"><strong>Total</strong></label>
+                    <input type="text" id="total" class="form-control" ng-model="$ctrl.data.totales.total" disabled>
+                </div>
+            </div>
+
         </div>
         <div class="col-sm-12">
             <button class="btn btn-primary btn-raised pull-right" ng-click="$ctrl.addConcepto()">Agregar Concepto</button>

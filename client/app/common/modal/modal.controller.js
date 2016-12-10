@@ -1,8 +1,10 @@
 class ModalController {
 
-    constructor ($uibModalInstance, title, data) {
+    constructor ($uibModalInstance, title, data, save) {
+        'ngInject';
         this.data = data;
         this.title = title;
+        this.save = save;
         this.modalInstance = $uibModalInstance;
         this.properties = data;
         this.event = {event: 'INIT'};

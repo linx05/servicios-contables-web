@@ -1,8 +1,9 @@
 let form;
 
 class RecibosFormController {
-    constructor () {
+    constructor (AuthService) {
         'ngInject';
+        this.readOnly = AuthService.isUser();
         this.repeatConcepto = [0];
     }
 

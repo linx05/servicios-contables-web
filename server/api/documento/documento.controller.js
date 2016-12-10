@@ -1,22 +1,39 @@
 const aqp = require('api-query-params');
+const Cliente = require('../cliente/cliente.model').Cliente;
 const Documento = require('./documento.model').Documento;
 
 function index (req, res) {
-    req = handleRequest(req);
-    const query = aqp.default(req.query);
+    if(req.user.level==='cliente') {
+        return Cliente.find({'id_user': mongoose.Types.ObjectId('req.user._id')})
+            .exec()
+            .then(cliente => {
+                return Documento.find('cliente',cliente._id)
+                    .populate('recibo pago')
+                    .exec()
+            })
+            .then(documentos => {
+                return res.status(200).json(documentos);
+            })
+            .catch(err => {
+                return handleError(res, err)
+            });
 
-    Documento.find(query.filter)
-        .populate('recibo pago cliente')
-        .skip(query.skip)
-        .limit(query.limit)
-        .sort(query.sort)
-        .exec((err, data) => {
-            if (err) {
-                return handleError(res, err);
-            }
+    }
+    else {
+        const query = aqp.default(req.query);
+        Documento.find(query.filter)
+            .populate('recibo pago cliente')
+            .skip(query.skip)
+            .limit(query.limit)
+            .sort(query.sort)
+            .exec((err, data) => {
+                if (err) {
+                    return handleError(res, err);
+                }
 
-            return res.status(200).json(data);
-        });
+                return res.status(200).json(data);
+            });
+    }
 }
 
 function show (req, res) {
@@ -107,13 +124,6 @@ function getError (name) {
 
 function handleError (res, err, code = 400) {
     return res.status(code).send(err);
-}
-
-function handleRequest (req) {
-    if (req.user.level === 'user') {
-        req.query.user = req.user._id;
-    }
-    return req;
 }
 
 module.exports = {index, show, create, update, destroy};

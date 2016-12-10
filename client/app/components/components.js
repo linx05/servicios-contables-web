@@ -10,6 +10,7 @@ import Clientes from './clientes';
 import Cuentas from './cuentas';
 import Documentos from './documentos';
 import DocumentosList from './documentos-list';
+import EstadoCuenta from './estado-cuenta';
 
 let componentModule = angular.module('app.components', [
     Login,
@@ -21,6 +22,7 @@ let componentModule = angular.module('app.components', [
     User,
     Home,
     Documentos,
+    EstadoCuenta,
     DocumentosList,
     DatosForm
 ])

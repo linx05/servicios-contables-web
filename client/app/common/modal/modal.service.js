@@ -21,14 +21,14 @@ class ModalService {
 		return template.replace('${component}', component);
 	}
 
-	show({ component, title, data = null, size='lg' } ) {
+	show({ component, title, data = null, size='lg', save = true } ) {
 		return this.modal.open({
 			bindToController: true,
 			controller,
             size,
 			controllerAs: '$ctrl',
 			template: this.generateTemplate(component),
-			resolve: { title: () => title, data: () => data }
+			resolve: { title: () => title, data: () => data,  save: () => save}
 		})
             .result
 		    .then(data => data)

@@ -3,7 +3,7 @@
 const Cliente = require('./cliente.model').Cliente;
 const User = require('../user/user.model').User;
 
-const claveDefecto = config.DEFAULT_PASSWORD || '12345';
+const claveDefecto = config.DEFAULT_PASSWORD;
 
 exports.index = function (req, res) {
     Cliente.find({}, function (err, clientes) {

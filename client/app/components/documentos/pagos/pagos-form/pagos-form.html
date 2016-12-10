@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-sm-12">
         <form class="form-horizontal" name="pagosForm" ng-submit="$ctrl.onSubmit();">
-            <fieldset>
+            <fieldset ng-disabled="$ctrl.readOnly">
                 <div class="form-group">
                     <input class="form-control" type="number" id="abono" name="abono" ng-model="$ctrl.data.pago.total" ng-required="true"
                            ng-max="$ctrl.max"

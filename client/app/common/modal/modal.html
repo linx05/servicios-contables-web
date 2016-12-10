@@ -8,9 +8,11 @@
 
 <div class="modal-footer">
     <button class="btn btn-raised btn-default" ng-click="$ctrl.setEvent('CANCEL'); $ctrl.cancel()">
-        Cancelar
+        Cerrar
     </button>
-    <button class="btn btn-raised btn-primary" ng-click="$ctrl.setEvent('OK')" ng-disabled="$ctrl.loading">
+    <button class="btn btn-raised btn-primary" ng-click="$ctrl.setEvent('OK')"
+            ng-disabled="$ctrl.loading"
+            ng-show="$ctrl.save">
         Guardar
     </button>
 </div>

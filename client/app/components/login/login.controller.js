@@ -19,7 +19,7 @@ class LoginController {
 				switch (authService.getLoginLevel()) {
 					case 'admin'      : return state.go('admin');
 					case 'empleado'   : return state.go('empleado');
-					case 'cliente'    : return state.go('cliente');
+					case 'cliente'    : return state.go('estado');
 					default           : return state.go('login');
 				}
 			})

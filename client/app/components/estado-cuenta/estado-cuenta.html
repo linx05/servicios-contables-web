@@ -1,0 +1,20 @@
+<div class="row">
+    <div class="col-sm-12" style="padding-top: 15px; padding-bottom: 15px">
+        <div class="center-block">
+            <ul class="nav nav-pills pull-right">
+                <li class="active"><a class="btn btn-raised btn-primary" href="javascript:void(0)">Saldo <span class="badge">$ {{$ctrl.saldos.saldo}}</span></a>
+                </li>
+                <li><a class="btn btn-raised btn-success" href="javascript:void(0)">Abonos <span class="badge">$ {{$ctrl.saldos.abonos}}</span></a>
+                </li>
+                <li><a class="btn btn-raised btn-danger" href="javascript:void(0)">Cargos <span
+                    class="badge">$ {{$ctrl.saldos.cargos}}</span></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <estado-cuenta-list data="$ctrl.documentos" on-view-item="$ctrl.view($event)"
+                            on-print-item="$ctrl.print($event)">
+        </estado-cuenta-list>
+    </div>
+</div>
+

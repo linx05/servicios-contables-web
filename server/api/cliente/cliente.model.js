@@ -95,7 +95,8 @@ let clienteSchema = new Schema({
         type: String
     },
     id_user: {
-        type: String
+        type: Schema.ObjectId,
+        ref : 'User'
     },
     contacto: contactoSchema,
     esquema_pago: esquemaPagoSchema,

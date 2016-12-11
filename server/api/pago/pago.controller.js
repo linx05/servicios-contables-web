@@ -49,6 +49,7 @@ function create (req, res) {
         .then(recibo => {
             recibo.saldo_pendiente -= pag.total;
             if(recibo.saldo_pendiente < 1) recibo.pagado = true;
+            recibo.saldo_pendiente = Math.floor(recibo.saldo_pendiente);
             recibo.pagos.push(pag._id);
             return recibo.save();
         })

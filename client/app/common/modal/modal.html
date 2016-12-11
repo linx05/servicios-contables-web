@@ -6,13 +6,12 @@
     ${component}
 </div>
 
-<div class="modal-footer">
+<div class="modal-footer" style="padding-top: 1em;">
     <button class="btn btn-raised btn-default" ng-click="$ctrl.setEvent('CANCEL'); $ctrl.cancel()">
         Cerrar
     </button>
     <button class="btn btn-raised btn-primary" ng-click="$ctrl.setEvent('OK')"
-            ng-disabled="$ctrl.loading"
-            ng-show="$ctrl.save">
+            ng-disabled="$ctrl.loading" ng-show="$ctrl.save">
         Guardar
     </button>
 </div>

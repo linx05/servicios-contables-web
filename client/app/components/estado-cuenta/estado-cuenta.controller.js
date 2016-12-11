@@ -5,12 +5,8 @@ export default class DocumentosListController {
         this.documentosService = DocumentosService;
         this.recibosService = RecibosService;
         this.modal = ModalService;
-        this.modalOptionsRecibo = {
-            component: '<recibos-edit></recibos-edit>',
-            title: 'Recibo'
-        };
-        this.modalOptionsPago = {
-            component: '<pagos-edit></pagos-edit>',
+        this.modalOptions = {
+            component: '<pagos-print-form></pagos-print-form>',
             title: 'Pago'
         };
     }
@@ -26,9 +22,11 @@ export default class DocumentosListController {
     $onInit () {
     }
 
-    select ({data}) {
-        this.selectedClient = data;
-        this.enableAdd = true;
+    view ({data}) {
+        this.modalOptions.data = {
+            documento: data
+        };
+        this.modal.show(this.modalOptions);
     }
 
 }

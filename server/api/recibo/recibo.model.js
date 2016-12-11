@@ -44,6 +44,15 @@ let reciboSchema = new Schema({
     }
 });
 
+function toRound2(num) {
+    return +(num).toFixed(2);
+}
+
+reciboSchema.path('subtotal').get(toRound2);
+reciboSchema.path('iva').get(toRound2);
+reciboSchema.path('total').get(toRound2);
+reciboSchema.path('saldo_pendiente').get(toRound2);
+
 module.exports = {
     Recibo: mongoose.model('Recibo', reciboSchema),
     ReciboSchema: reciboSchema

@@ -22,6 +22,10 @@ let pagoSchema = new Schema({
     }
 });
 
+pagoSchema.path('total').get(num=>{
+    return +(num).toFixed(2);
+});
+
 module.exports = {
     Pago: mongoose.model('Pago', pagoSchema),
     PagoSchema: pagoSchema

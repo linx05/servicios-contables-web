@@ -27,7 +27,7 @@ const documentos = angular
 				},
 				data: {
 					requiresLogin: true,
-					level: ['admin','employee']
+					level: ['admin','empleado']
 				},
 				resolve: {
 					data: function ($stateParams, DocumentosService, ClientesService) {

@@ -2,14 +2,12 @@ import template from './pagos-print-form.html';
 import controller from './pagos-print-form.controller';
 import './pagos-print-form.css';
 
-let pagosFormComponent = {
+let pagosPrintFormComponent = {
     bindings: {
-        data: '<',
-        event: '<',
-        onSave: '&',
+        data: '<'
     },
     template,
     controller
 };
 
-export default pagosFormComponent;
+export default pagosPrintFormComponent;

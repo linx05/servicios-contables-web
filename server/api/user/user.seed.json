@@ -18,17 +18,5 @@
       "username": "admin1",
       "password": "admin"
     }
-  },
-  {
-    "full_name": "Cliente 1",
-    "email": "cliente1@services.com",
-    "level": "cliente",
-    "active": true,
-    "cuenta": {
-      "username": "cliente1",
-      "password": "cliente"
-    }
   }
-
-
 ]

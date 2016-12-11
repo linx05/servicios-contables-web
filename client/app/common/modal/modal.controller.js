@@ -28,5 +28,5 @@ class ModalController {
     }
 
 }
-ModalController.$inject = ['$uibModalInstance', 'title', 'data'];
+ModalController.$inject = ['$uibModalInstance', 'title', 'data', 'save'];
 export default ModalController;

@@ -3,7 +3,6 @@ import template from './documentos-list.html';
 
 const DocumentosListComponent = {
 	bindings: {
-		documentos: '<',
 		data: '<',
 	},
 	controller,

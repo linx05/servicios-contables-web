@@ -4,10 +4,14 @@ const Documento = require('./documento.model').Documento;
 
 function index (req, res) {
     if(req.user.level==='cliente') {
-        return Cliente.find({'id_user': mongoose.Types.ObjectId('req.user._id')})
+        let client;
+        return Cliente.findOne({'id_user': new mongoose.Types.ObjectId(req.user._id)})
             .exec()
             .then(cliente => {
-                return Documento.find('cliente',cliente._id)
+                console.log(cliente, new mongoose.Types.ObjectId(req.user._id));
+                if(!cliente) return Promise.reject();
+                client = cliente;
+                return Documento.find({'cliente':cliente._id})
                     .populate({
                         path: 'pago',
                         populate : {
@@ -25,9 +29,10 @@ function index (req, res) {
                     .exec()
             })
             .then(documentos => {
-                return res.status(200).json(documentos);
+                return res.status(200).json({documentos,cliente:client});
             })
             .catch(err => {
+                console.log(err);
                 return handleError(res, err)
             });
 

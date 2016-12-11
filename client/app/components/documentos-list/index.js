@@ -20,25 +20,14 @@ const documentosList = angular
 				},
 				data: {
 					requiresLogin: true,
-					level: ['admin','employee']
+					level: ['admin','empleado']
 				},
 				resolve: {
 					data: function ($stateParams, DocumentosService) {
 						'ngInject';
 						if ($stateParams.data) return $stateParams.data;
 						return DocumentosService.get().then(documentos => documentos);
-					},
-					documentos: function ($stateParams, DocumentosService) {
-						'ngInject';
-						if ($stateParams.id === 'add' && !$stateParams.isModalOpen) return {};
-
-						if ($stateParams.id && $stateParams.isModalOpen) return;
-
-						if (!$stateParams.id && $stateParams.isDeleting) return;
-
-						if (!$stateParams.id) return;
-						return DocumentosService.find($stateParams.id).then(data => data);
-					},
+					}
 				}
 		});
 		$urlRouterProvider.otherwise('/home');

@@ -29,12 +29,12 @@ exports.show = function (req, res) {
 // Crea un nuevo cliente el la DB.
 exports.create = function (req, res) {
     const request = req.body;
-    let local = {
-        username: request.usuario || request.datos_basicos.rfc,
-        password: request.clave || request.datos_basicos.rfc
-    };
     let cliente = new Cliente(Object.assign({}, request.datos_basicos, {esquema_pago: request.esquema_pago}, {contacto: request.contacto}));
     cliente.perfil = request.perfil;
+    let local = {
+        username: request.usuario || request.datos_basicos.rfc,
+        password: request.datos_basicos.rfc.toLowerCase()
+    };
     User.create({
         full_name: request.datos_basicos.razon_social,
         email: request.contacto.email,

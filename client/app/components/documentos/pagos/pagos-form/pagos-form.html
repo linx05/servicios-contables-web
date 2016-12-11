@@ -3,15 +3,16 @@
         <form class="form-horizontal" name="pagosForm" ng-submit="$ctrl.onSubmit();">
             <fieldset ng-disabled="$ctrl.readOnly">
                 <div class="form-group">
-                    <input class="form-control" type="number" id="abono" name="abono" ng-model="$ctrl.data.pago.total" ng-required="true"
-                           ng-max="$ctrl.max"
-                           placeholder="Cantidad a Abonar">
+                    <label for="abono">Cantidad A Abonar</label>
+                    <input class="form-control" type="number" id="abono" step="0.01" name="abono"
+                           ng-model="$ctrl.data.pago.total" ng-required="true"
+                           ng-max="$ctrl.max">
                 </div>
                 <div class="form-group">
                     <label for="level">Recibo a Pagar</label>
                     <select class="form-control" name="level" id="level" ng-model="$ctrl.data.pago.recibo"
                             ng-change="$ctrl.calculateMax()"
-                            ng-options="recibo as ('$' + recibo.total ) for recibo in $ctrl.data.recibos track by recibo._id" ng-required="true">
+                            ng-options="recibo as ('$' + +(recibo.saldo_pendiente).toFixed(2) ) for recibo in $ctrl.data.recibos track by recibo._id" ng-required="true">
                         <option value="" selected="selected">Escoje un Recibo</option>
                     </select>
                 </div>

@@ -24,7 +24,7 @@ class RecibosFormController {
 
     calculateMax() {
         if(this.data.pago.recibo){
-            this.max = this.data.pago.recibo.saldo_pendiente || this.max;
+            this.max = +(this.data.pago.recibo.saldo_pendiente).toFixed(2) || this.max;
         }
     }
 

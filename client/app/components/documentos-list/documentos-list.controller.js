@@ -10,7 +10,7 @@ export default class DocumentosListController {
             component: '<recibos-edit></recibos-edit>',
             title: 'Recibo'
         };
-        this.modalOptionsPago = {
+        this.modalOptions = {
             component: '<pagos-edit></pagos-edit>',
             title: 'Pago'
         };
@@ -48,7 +48,7 @@ export default class DocumentosListController {
 
     add (type) {
         this.modalToShow = this.modalOptionsRecibo;
-        if(type == 'pago') this.modalToShow = this.modalOptionsPago;
+        if(type == 'pago') this.modalToShow = this.modalOptions;
 
         this.modalToShow.data = {
             cliente: this.selectedClient

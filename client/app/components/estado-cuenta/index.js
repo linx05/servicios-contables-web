@@ -2,8 +2,8 @@ import angular from 'angular';
 import listEstadoCuenta from './estado-cuenta-list';
 import estadoCuenta from './estado-cuenta.component';
 
-const documentosList = angular
-    .module('documentos-list', [
+const estadoCuentaComponent = angular
+    .module('estado-cuenta', [
         listEstadoCuenta
     ])
     .component('estadoCuenta', estadoCuenta)
@@ -26,7 +26,8 @@ const documentosList = angular
                     data: function ($stateParams, DocumentosService) {
                         'ngInject';
                         if ($stateParams.data) return $stateParams.data;
-                        return DocumentosService.get().then(documentos => {
+                        return DocumentosService.get().then(result => {
+                            let documentos = result.documentos;
                             const saldos = _.reduce(documentos, (saldo, documento) => {
                                 if (documento.tipo == 'pago') {
                                     saldo.abonos += documento.pago.total;
@@ -36,9 +37,13 @@ const documentosList = angular
                                     saldo.cargos += documento.recibo.total;
                                     saldo.saldo += documento.recibo.total;
                                 }
+                                saldo.abonos = +(saldo.abonos).toFixed(2);
+                                saldo.cargos = +(saldo.cargos).toFixed(2);
+                                saldo.saldo = +(saldo.saldo).toFixed(2);
                                 return saldo;
                             }, {saldo: 0, abonos: 0, cargos: 0});
                             return {
+                                cliente: result.cliente,
                                 documentos,
                                 saldos
                             }
@@ -50,4 +55,4 @@ const documentosList = angular
     })
     .name;
 
-export default documentosList;
+export default estadoCuentaComponent;

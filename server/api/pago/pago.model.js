@@ -14,6 +14,17 @@ let pagoSchema = new Schema({
         type: Schema.ObjectId,
         ref: 'Recibo',
         required: true
+    },
+    cfd : {
+        type: Number
+    },
+    saldo_anterior: {
+        type: Number,
+        required: true
+    },
+    saldo_posterior: {
+        type: Number,
+        required: true
     }
 }, {
     timestamps: {
@@ -21,6 +32,9 @@ let pagoSchema = new Schema({
         updatedAt: 'updated_at',
     }
 });
+const autoIncrement = require('mongoose-auto-increment');
+
+pagoSchema.plugin(autoIncrement.plugin,{model:'Pago',field:'cfd',startAt:1});
 
 pagoSchema.path('total').get(num=>{
     return +(num).toFixed(2);

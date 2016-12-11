@@ -8,7 +8,6 @@ function index (req, res) {
         return Cliente.findOne({'id_user': new mongoose.Types.ObjectId(req.user._id)})
             .exec()
             .then(cliente => {
-                console.log(cliente, new mongoose.Types.ObjectId(req.user._id));
                 if(!cliente) return Promise.reject();
                 client = cliente;
                 return Documento.find({'cliente':cliente._id})

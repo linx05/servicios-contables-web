@@ -1,4 +1,4 @@
-<div class="modal-header">
+<div class="modal-header hidden-print" ng-if="$ctrl.title">
     <h4>{{$ctrl.title}}</h4>
 </div>
 
@@ -6,7 +6,7 @@
     ${component}
 </div>
 
-<div class="modal-footer" style="padding-top: 1em;">
+<div class="modal-footer hidden-print" style="padding-top: 1em;">
     <button class="btn btn-raised btn-default" ng-click="$ctrl.setEvent('CANCEL'); $ctrl.cancel()">
         Cerrar
     </button>

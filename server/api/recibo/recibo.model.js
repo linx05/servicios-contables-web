@@ -26,6 +26,9 @@ let reciboSchema = new Schema({
         required: true,
         default: false
     },
+    cfd : {
+        type: Number
+    },
     cliente: {
         type: Schema.ObjectId,
         ref : 'Cliente',
@@ -43,6 +46,10 @@ let reciboSchema = new Schema({
         updatedAt: 'updated_at',
     }
 });
+
+const autoIncrement = require('mongoose-auto-increment');
+
+reciboSchema.plugin(autoIncrement.plugin,{model:'Recibo',field:'cfd',startAt:1});
 
 function toRound2(num) {
     return +(num).toFixed(2);

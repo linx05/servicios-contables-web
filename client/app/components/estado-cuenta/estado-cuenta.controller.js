@@ -5,9 +5,13 @@ export default class DocumentosListController {
         this.documentosService = DocumentosService;
         this.recibosService = RecibosService;
         this.modal = ModalService;
-        this.modalOptions = {
+        this.modalPagosOptions = {
             component: '<pagos-print-form></pagos-print-form>',
-            title: 'Pago'
+            save: false
+        };
+        this.modalRecibosOptions = {
+            component: '<recibos-print-form></recibos-print-form>',
+            save: false
         };
     }
 
@@ -15,6 +19,7 @@ export default class DocumentosListController {
         if(changes.data) {
             this.documentos = Object.assign([],this.data.documentos);
             this.saldos = Object.assign({}, this.data.saldos);
+            this.cliente = Object.assign({}, this.data.cliente);
         }
 
     }
@@ -23,10 +28,18 @@ export default class DocumentosListController {
     }
 
     view ({data}) {
-        this.modalOptions.data = {
-            documento: data
+        let modal;
+        if(data.tipo === 'pago'){
+            modal = this.modalPagosOptions;
+        }
+        else {
+            modal = this.modalRecibosOptions;
+        }
+        modal.data = {
+            documento: data,
+            cliente: this.cliente
         };
-        this.modal.show(this.modalOptions);
+        this.modal.show(modal);
     }
 
 }

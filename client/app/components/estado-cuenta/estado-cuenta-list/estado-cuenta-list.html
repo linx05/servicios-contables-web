@@ -1,5 +1,5 @@
-<div id="reports">
-    <table class="table table-striped table-hover clickable">
+<div class="container-fluid" id="reports">
+    <table class="table table-responsive table-striped table-hover clickable">
         <thead>
         <tr>
             <th>Fecha</th>
@@ -9,12 +9,12 @@
             <th>Cargos</th>
             <th>Abonos</th>
             <th><span class="glyphicon glyphicon-usd"></span></th>
-            <th></th>
         </tr>
         </thead>
         <tbody>
-        <tr dir-paginate="documento in $ctrl.data | itemsPerPage: $ctrl.pageSize|  toArray:false | orderBy: '-fecha_generacion'">
-            <td>{{documento.fecha_generacion | amDateFormat:'YYYY-MM-DD'}}</td>
+        <tr dir-paginate="documento in $ctrl.data | itemsPerPage: $ctrl.pageSize|  toArray:false | orderBy: '-fecha_generacion'"
+            ng-click="$ctrl.viewItem(documento)">
+            <td>{{documento.fecha_generacion | amDateFormat:'MM/DD/YYYY'}}</td>
             <td>{{ documento.cfd }}</td>
             <td class="text-capitalize">{{documento.tipo}}</td>
             <td ng-if="documento.tipo === 'recibo'">
@@ -27,9 +27,6 @@
             <td>{{documento.tipo === 'pago' ? '$' + documento.pago.total : ''}}</td>
             <td><span class="glyphicon" ng-class="documento.pago ? 'glyphicon-ban-circle' : documento.recibo.pagado
             ? 'glyphicon-ok-circle text-success' : 'glyphicon-remove-circle text-danger'"></span></td>
-            <td><a class="btn btn-default btn-raised" ng-click="$ctrl.viewItem(documento)">Ver</a>
-                <a class="btn btn-danger btn-raised" ng-click="$ctrl.printItem(documento)">Imprimir</a>
-            </td>
         </tr>
         </tbody>
     </table>

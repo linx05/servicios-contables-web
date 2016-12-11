@@ -40,14 +40,20 @@ function show (req, res) {
 function create (req, res) {
     const data = req.body;
     let pag;
-    return Pago.create(Object.assign({},data))
+    return Recibo.findById(data.recibo).exec()
+        .then(recibo => {
+            let pago = new Pago(Object.assign({},data));
+            pago.saldo_anterior = recibo.saldo_pendiente;
+            pago.saldo_posterior = recibo.saldo_pendiente - pago.total;
+            return pago.save();
+        })
         .then(pago => {
             if (!pago) return handleError(res, null);
             pag = pago;
             return Recibo.findById(pago.recibo).exec()
         })
         .then(recibo => {
-            recibo.saldo_pendiente -= pag.total;
+            recibo.saldo_pendiente -= data.total;
             if(recibo.saldo_pendiente < 1) recibo.pagado = true;
             recibo.saldo_pendiente = Math.floor(recibo.saldo_pendiente);
             recibo.pagos.push(pag._id);

@@ -21,7 +21,7 @@ class ModalService {
 		return template.replace('${component}', component);
 	}
 
-	show({ component, title, data = null, size='lg', save = true } ) {
+	show({ component, title = null, data = null, size='lg', save = true } ) {
 		return this.modal.open({
 			bindToController: true,
 			controller,

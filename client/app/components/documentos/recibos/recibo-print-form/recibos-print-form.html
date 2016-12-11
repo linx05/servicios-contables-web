@@ -34,21 +34,38 @@
                         <thead>
                         <tr>
                             <th><strong>Concepto</strong></th>
-                            <th>Total</th>
-                            <th>Saldo Anterior</th>
-                            <th>Saldo Posterior</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>IVA</th>
+                            <th>Importe</th>
                         </tr>
                         </thead>
                         <tbody>
+                        <tr ng-repeat="(i,producto) in $ctrl.documento.recibo.productos">
+                            <td>{{(i+1) + '. '+ producto.concepto}}</td>
+                            <td>$ {{producto.precio.toFixed(2)}}</td>
+                            <td>{{producto.cantidad}}</td>
+                            <td>$ {{producto.iva.toFixed(2)}}</td>
+                            <td>$ {{producto.importe.toFixed(2)}}</td>
+                        </tr>
                         <tr>
-                            <th>Recibo por concepto de: <br/>
-                                <span ng-repeat="(i,producto) in $ctrl.documento.pago.recibo.productos">
-                                    {{(i+1) + '. '+ producto.concepto}}
-                                </span>
-                            </th>
-                            <th>$ {{$ctrl.documento.pago.total}}</th>
-                            <th>$ {{$ctrl.documento.pago.saldo_anterior}}</th>
-                            <th>$ {{$ctrl.documento.pago.saldo_posterior}}</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <div>
+                                    <p class="lead"><strong>Subtotal: </strong></p><br/>
+                                    <p class="lead"><strong>IVA: </strong></p><br/>
+                                    <p class="lead"><strong>Total:</strong></p><br/>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <p class="lead">$ {{$ctrl.documento.recibo.subtotal.toFixed(2)}}</p><br/>
+                                    <p class="lead">$ {{$ctrl.documento.recibo.iva.toFixed(2)}}</p><br/>
+                                    <p class="lead"><strong>$ {{$ctrl.documento.recibo.total.toFixed(2)}}</strong></p><br/>
+                                </div>
+                            </td>
                         </tr>
                         </tbody>
                     </table>

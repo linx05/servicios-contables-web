@@ -10,6 +10,7 @@
     "angular-moment": "^1.0.1",
     "angular-socket-io": "^0.7.0",
     "angular-storage": "0.0.15",
+    "angular-toarrayfilter": "^1.0.1",
     "angular-toastr": "^2.1.1",
     "angular-ui-bootstrap": "^2.1.4",
     "angular-ui-router": "^1.0.0-beta.1",

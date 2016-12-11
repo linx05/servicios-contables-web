@@ -8,7 +8,20 @@ function index (req, res) {
             .exec()
             .then(cliente => {
                 return Documento.find('cliente',cliente._id)
-                    .populate('recibo pago')
+                    .populate({
+                        path: 'pago',
+                        populate : {
+                            path: 'recibo',
+                            model: 'Recibo'
+                        }
+                    })
+                    .populate({
+                        path: 'recibo',
+                        populate: {
+                            path: 'pagos',
+                            model: 'Pago'
+                        }
+                    })
                     .exec()
             })
             .then(documentos => {

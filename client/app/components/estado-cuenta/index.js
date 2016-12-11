@@ -38,7 +38,6 @@ const documentosList = angular
                                 }
                                 return saldo;
                             }, {saldo: 0, abonos: 0, cargos: 0});
-                            console.log(saldos);
                             return {
                                 documentos,
                                 saldos

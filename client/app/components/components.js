@@ -8,6 +8,7 @@ import DatosForm from './admin/datosForm';
 import Cliente from './cliente';
 import Clientes from './clientes';
 import Cuentas from './cuentas';
+import Firmas from './firmas';
 import Documentos from './documentos';
 import DocumentosList from './documentos-list';
 import EstadoCuenta from './estado-cuenta';
@@ -23,6 +24,7 @@ let componentModule = angular.module('app.components', [
     Home,
     Documentos,
     EstadoCuenta,
+    Firmas,
     DocumentosList,
     DatosForm
 ])

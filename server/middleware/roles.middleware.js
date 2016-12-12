@@ -19,7 +19,7 @@ user.use('cliente', function (req) {
 });
 
 user.use('empleado', function (req) {
-    return (req.user.level === 'cliente' || req.user.level === 'admin');
+    return (req.user.level === 'empleado' || req.user.level === 'admin');
 });
 
 user.use('admin', (req) => {

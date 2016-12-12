@@ -31,11 +31,11 @@ function userFoundToken(user, request, res) {
         let token = jwt.encode(payload, conf.jwtSecret);
         return res.json({token: token});
     }
-    return handleError(res, 'Documento not found', 404);
+    return handleError(res, 'User not found', 404);
 }
 
 function objNotFound(error, res) {
-    return handleError(res, 'Documento not found', 404);
+    return handleError(res, 'User not found', 404);
 }
 
 function handleError(res, err, code = 500) {
@@ -51,7 +51,7 @@ exports = module.exports = ()=> {
         User.find({}).then((user) => {
             return res.json({users: user});
         }).catch((error) => {
-            return handleError(res, 'no Documento');
+            return handleError(res, 'no User');
         })
     }
 

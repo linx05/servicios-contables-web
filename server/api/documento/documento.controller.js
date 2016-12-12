@@ -15,7 +15,7 @@ function index (req, res) {
                         path: 'pago',
                         populate : {
                             path: 'recibo',
-                            model: 'Recibo'
+                            model: 'Firma'
                         }
                     })
                     .populate({

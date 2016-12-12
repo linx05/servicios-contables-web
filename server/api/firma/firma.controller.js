@@ -1,14 +1,13 @@
 const aqp = require('api-query-params');
-const Documento = require('../documento/documento.model').Documento;
-const Pago = require('./pago.model').Pago;
-const Recibo = require('../recibo/recibo.model').Recibo;
+const Firma = require('./firma.model.js').Firma;
+const moment = require('moment');
 
 function index (req, res) {
     req = handleRequest(req);
     const query = aqp.default(req.query);
 
-    Documento.find(query.filter)
-        .populate('pago recibo')
+    Firma.find(query.filter)
+        .populate('cliente')
         .skip(query.skip)
         .limit(query.limit)
         .sort(query.sort)
@@ -22,8 +21,8 @@ function index (req, res) {
 }
 
 function show (req, res) {
-    Documento.findById(req.params.id)
-        .populate('pago recibo')
+    Firma.findById(req.params.id)
+        .populate('cliente')
         .exec(function (err, data) {
             if (err) {
                 return handleError(res, err);
@@ -39,34 +38,7 @@ function show (req, res) {
 
 function create (req, res) {
     const data = req.body;
-    let pag;
-    return Recibo.findById(data.recibo).exec()
-        .then(recibo => {
-            let pago = new Pago(Object.assign({},data));
-            pago.saldo_anterior = recibo.saldo_pendiente;
-            pago.saldo_posterior = recibo.saldo_pendiente - pago.total;
-            return pago.save();
-        })
-        .then(pago => {
-            if (!pago) return handleError(res, null);
-            pag = pago;
-            return Recibo.findById(pago.recibo).exec()
-        })
-        .then(recibo => {
-            recibo.saldo_pendiente -= data.total;
-            if(recibo.saldo_pendiente < 1) recibo.pagado = true;
-            recibo.saldo_pendiente = Math.floor(recibo.saldo_pendiente);
-            recibo.pagos.push(pag._id);
-            return recibo.save();
-        })
-        .then(recibo => {
-            return Documento.create({
-                tipo: 'pago',
-                fecha_generacion: Date.now(),
-                pago: pag._id,
-                cliente: recibo.cliente
-            });
-        })
+    return Firma.create(Object.assign({},data))
         .then(data => {
             if (data) return res.status(201).json(data);
             else return handleError(res, null);
@@ -131,7 +103,6 @@ function getError (name) {
 }
 
 function handleError (res, err, code = 400) {
-    console.log(err);
     return res.status(code).send(err);
 }
 

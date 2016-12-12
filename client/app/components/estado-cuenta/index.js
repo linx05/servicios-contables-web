@@ -2,6 +2,7 @@ import angular from 'angular';
 import listEstadoCuenta from './estado-cuenta-list';
 import estadoCuenta from './estado-cuenta.component';
 
+
 const estadoCuentaComponent = angular
     .module('estado-cuenta', [
         listEstadoCuenta

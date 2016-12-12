@@ -3,10 +3,8 @@ import controller from './empleado.controller';
 import './empleado.css';
 
 let employeeComponent = {
-  restrict: 'E',
-  bindings: {},
-  template,
-  controller
+    template,
+    controller
 };
 
 export default employeeComponent;

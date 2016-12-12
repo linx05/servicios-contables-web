@@ -49,7 +49,7 @@ let reciboSchema = new Schema({
 
 const autoIncrement = require('mongoose-auto-increment');
 
-reciboSchema.plugin(autoIncrement.plugin,{model:'Recibo',field:'cfd',startAt:1});
+reciboSchema.plugin(autoIncrement.plugin,{model:'Firma',field:'cfd',startAt:1});
 
 function toRound2(num) {
     return +(num).toFixed(2);
@@ -61,6 +61,6 @@ reciboSchema.path('total').get(toRound2);
 reciboSchema.path('saldo_pendiente').get(toRound2);
 
 module.exports = {
-    Recibo: mongoose.model('Recibo', reciboSchema),
+    Recibo: mongoose.model('Firma', reciboSchema),
     ReciboSchema: reciboSchema
 };

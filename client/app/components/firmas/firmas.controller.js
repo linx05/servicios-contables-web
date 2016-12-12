@@ -1,4 +1,4 @@
-export default class DocumentosListController {
+export default class FirmasController {
 
     constructor (DocumentosService, RecibosService, ModalService, toastr) {
         'ngInject';

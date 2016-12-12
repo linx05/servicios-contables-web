@@ -9,7 +9,7 @@ export default class DocumentosController {
         this.modal = ModalService;
         this.modalOptionsRecibo = {
             component: '<recibos-edit></recibos-edit>',
-            title: 'Recibo'
+            title: 'Firma'
         };
         this.modalOptions = {
             component: '<pagos-edit></pagos-edit>',

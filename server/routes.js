@@ -9,4 +9,5 @@ module.exports = function (app) {
     app.use('/api/documentos', require('./api/documento'));
     app.use('/api/recibos', require('./api/recibo'));
     app.use('/api/pagos', require('./api/pago'));
+    app.use('/api/recibos', require('./api/recibo'));
 };

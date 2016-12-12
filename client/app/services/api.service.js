@@ -11,7 +11,6 @@ class ApiService {
         toast = toastr;
         routes.api += '/api/';
     }
-
     getApiUrl() {
         return this.apiServer;
     }
@@ -25,7 +24,6 @@ class ApiService {
             .then(this.requestComplete)
             .catch(this.requestFailed.bind(this));
     }
-
     httpGet(url) {
         return this.httpExecute(url, 'GET');
     }

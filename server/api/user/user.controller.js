@@ -39,10 +39,10 @@ exports.createLocalAccount = (req, res) => {
         full_name: request.full_name,
         email: request.email,
         level: request.level,
-        local: local
+        cuenta: local
     });
     return user.save(function (err, user) {
-        if (!err) return res.status(201).json(user);
+        if (!err) return res.status(201).json(user);s
         return handleError(res, err, 422);
     });
 };

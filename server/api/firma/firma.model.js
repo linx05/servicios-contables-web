@@ -31,6 +31,10 @@ let firmaSchema = new Schema({
         ref : 'Cliente',
         required: true
     },
+    enviado: {
+        type: Boolean,
+        default: false
+    },
     correo : {
       type: String
     },

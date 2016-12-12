@@ -13,6 +13,7 @@ global.config = require('./config/environment');
 global._ = require('lodash');
 const bodyParser = require('body-parser');
 const autoIncrement = require('mongoose-auto-increment');
+
 // Use native promises for mongoose
 mongoose.Promise = global.Promise;
 
@@ -55,6 +56,7 @@ require('./config/socketio')(socketio);
 require('./config/express')(app);
 require('./routes')(app);
 require('./static')(app);
+require('./jobs/agenda')(mongooseConnection);
 
 // Start server
 server.listen(config.port, config.ip, function () {

@@ -8,8 +8,7 @@ export default class CuentasFormController {
     $onInit () {
         this.levels = [
             {id: 'admin',     name: 'Administrador'},
-            {id: 'empleado',  name: 'Empleado'},
-            {id: 'cliente',   name: 'Cliente'},
+            {id: 'empleado',  name: 'Empleado'}
         ];
     }
 

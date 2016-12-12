@@ -43,6 +43,8 @@
     "mongoose-auto-increment": "^5.0.1",
     "mongoose-unique-validator": "^1.0.2",
     "morgan": "^1.7.0",
+    "nodemailer": "^2.7.0",
+    "nodemailer-mailgun-transport": "^1.2.2",
     "normalize.css": "^3.0.3",
     "passport": "^0.3.2",
     "passport-jwt": "^2.2.1",

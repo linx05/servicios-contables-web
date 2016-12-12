@@ -2,18 +2,18 @@ const Firma = require('../api/firma/firma.model').Firma;
 const mailService = require('../services/mail/mailer.service');
 const moment = require('moment');
 function checkFirmaSchedule (job, done) {
-    Firma.find({
-        'fecha_notificacion': {
-            $lt: moment().add(5, 'hours').toDate(),
-            $gt: moment().substract(5, 'hours').toDate()
-        },
+    return Firma.find({
         'enviado':false
     })
         .populate('cliente empleado')
         .exec()
         .then(firmas => {
-            if (!firmas) done();
+            if (!firmas) return done();
             let count = 0;
+            firmas = _.filter(firmas, firma => {
+                return Math.abs(moment().diff(moment(firma.fecha_notificacion),'hours')) < 2;
+            });
+            if(!firmas.length > 0) return done();
             return _.map(firmas, firma => {
                 let correo = {
                     subject: 'Recordatorio de Vencimiento de Firma',

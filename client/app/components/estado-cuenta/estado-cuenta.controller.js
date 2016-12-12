@@ -2,7 +2,7 @@ export default class DocumentosListController {
 
     constructor (DocumentosService, RecibosService, ModalService) {
         'ngInject';
-        this.documentosService = DocumentosService;
+        this.firmasService = DocumentosService;
         this.recibosService = RecibosService;
         this.modal = ModalService;
         this.modalPagosOptions = {

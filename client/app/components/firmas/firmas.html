@@ -1,19 +1,11 @@
 <div class="row">
-    <div class="col-sm-6">
-        <input id="filterFolio" type="text" class="form-control"
-               placeholder="Folio"
-               ng-model="$ctrl.filterSearchFolio"
-               ng-change="$ctrl.filterClientes('cfd',$ctrl.filterSearchFolio)">
-    </div>
-    <div class="col-sm-6">
-        <input id="filter" type="text" class="form-control"
-               placeholder="Busqueda por RFC o Razon Social"
-               ng-model="$ctrl.filterSearch"
-               ng-change="$ctrl.filterClientes('rfc',$ctrl.filterSearch)">
+    <div class="col-sm-12">
+        <button class="btn btn-raised btn-success pull-right" ng-click="$ctrl.add()">Agregar</button>
     </div>
     <div class="col-sm-12">
-        <firmas-list data="$ctrl.documentos">
-        </firmas-list>
+        <firmas-list data="$ctrl.data" on-select-item="$ctrl.edit($event)"
+                      on-delete-item="$ctrl.delete($event)"></firmas-list>
     </div>
 </div>
+
 

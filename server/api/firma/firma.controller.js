@@ -3,11 +3,10 @@ const Firma = require('./firma.model.js').Firma;
 const moment = require('moment');
 
 function index (req, res) {
-    req = handleRequest(req);
     const query = aqp.default(req.query);
 
-    Firma.find(query.filter)
-        .populate('cliente')
+    Firma.find(Object.assign({},query.filter,{empleado: req.user._id}))
+        .populate('cliente empleado')
         .skip(query.skip)
         .limit(query.limit)
         .sort(query.sort)
@@ -21,8 +20,9 @@ function index (req, res) {
 }
 
 function show (req, res) {
+    console.log(req.params);
     Firma.findById(req.params.id)
-        .populate('cliente')
+        .populate('cliente empleado')
         .exec(function (err, data) {
             if (err) {
                 return handleError(res, err);
@@ -32,7 +32,7 @@ function show (req, res) {
                 return res.status(404).send('Not Found');
             }
 
-            return res.json(data);
+            return res.status(200).json(data);
         });
 }
 
@@ -49,36 +49,36 @@ function create (req, res) {
 function update (req, res) {
     if (req.body._id) delete req.body._id;
 
-    Documento.findById(req.params.id, function (err, documento) {
+    Firma.findById(req.params.id, function (err, firma) {
         if (err) {
             return handleError(res, err);
         }
 
-        if (!documento) {
+        if (!firma) {
             return res.status(404).send('Not Found');
         }
 
         delete req.body.events;
-        let updated = Object.assign(documento, req.body);
+        let updated = Object.assign(firma, req.body);
 
         updated.save(function (err) {
             if (err) {
                 return handleError(res, err);
             }
-            return res.status(200).json(documento);
+            return res.status(200).json(firma);
         });
     });
 }
 
 function destroy (req, res) {
-    Documento.findById(req.params.id, function (err, documento) {
+    Firma.findById(req.params.id, function (err, firma) {
         if (err) {
             return handleError(res, err);
         }
-        if (!documento) {
+        if (!firma) {
             return res.status(404).send('Not Found');
         }
-        documento.remove(function (err) {
+        firma.remove(function (err) {
             if (err) {
                 return handleError(res, err);
             }
@@ -87,30 +87,8 @@ function destroy (req, res) {
     });
 }
 
-function getError (name) {
-    const error = {message: '', name: 'ValidationError', errors: {}};
-
-    if (name === 'user') {
-        error.message = 'User level invalid';
-        error.errors = {user: {}};
-    }
-    else if (name === 'freight') {
-        error.message = 'Documento box is unavailable';
-        error.errors = {freight: {}};
-    }
-
-    return error;
-}
-
 function handleError (res, err, code = 400) {
     return res.status(code).send(err);
-}
-
-function handleRequest (req) {
-    if (req.user.level === 'user') {
-        req.query.user = req.user._id;
-    }
-    return req;
 }
 
 module.exports = {index, show, create, update, destroy};

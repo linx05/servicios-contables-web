@@ -1,11 +1,15 @@
 import angular from 'angular';
 import firmasList from './firmas-list';
+import firmasEdit from './firmas-edit';
+import firmasForm from './firmas-form';
 import firmasComponent from './firmas.component';
 import firmasService from './firmas.service';
 
 const firmas = angular
 	.module('firmas', [
-		firmasList
+		firmasList,
+        firmasEdit,
+        firmasForm
 	])
     .service('FirmasService', firmasService)
 	.component('firmas', firmasComponent)

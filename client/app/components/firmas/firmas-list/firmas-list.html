@@ -2,33 +2,30 @@
     <table class="table table-striped table-hover clickable">
         <thead>
         <tr>
-            <th>Tipo</th>
-            <th>RFC Receptor</th>
-            <th>Razon Social del Receptor</th>
-            <th># CFD</th>
-            <th>Fecha</th>
-            <th>Monto</th>
-            <th><span class="glyphicon glyphicon-usd"></span></th>
+            <th>Cliente</th>
+            <th>Correo</th>
+            <th>Fecha Vencimiento</th>
+            <th>Fecha Notificacion</th>
+            <th></th>
+            <th></th>
             <th></th>
         </tr>
         </thead>
         <tbody>
-        <tr dir-paginate="documento in $ctrl.data | itemsPerPage: $ctrl.pageSize">
-            <td class="text-capitalize">{{documento.tipo}}</td>
-            <td>{{ documento.cliente.rfc }}</td>
-            <td>{{ documento.cliente.razon_social }}</td>
-            <td>{{ documento.cfd }}</td>
-            <td>{{documento.fecha_generacion  | amDateFormat:'YYYY-MM-DD'}}</td>
-            <td>$ {{documento.pago ? documento.pago.total : documento.recibo.total}}</td>
-            <td><span class="glyphicon" ng-class="documento.pago ? 'glyphicon-ban-circle' : documento.recibo.pagado
-            ? 'glyphicon-ok-circle text-success' : 'glyphicon-remove-circle text-danger'"></span></td>
-            <td><a class="btn btn-default btn-raised" ng-click="$ctrl.selectItem(documento)">Editar</a>
-                <a class="btn btn-danger btn-raised" ng-click="$ctrl.deleteItem(documento)">Eliminar</a>
+        <tr dir-paginate="firma in $ctrl.data | itemsPerPage: $ctrl.pageSize | toArray:false | orderBy: '-fecha_vencimiento'">
+            <td>{{ firma.cliente.razon_social }}</td>
+            <td>{{ firma.correo }}</td>
+            <td>{{ firma.fecha_vencimiento | amDateFormat: 'MM/DD/YYYY h:mm a' }}</td>
+            <td>{{ firma.fecha_notificacion | amDateFormat: 'MM/DD/YYYY h:mm a' }}</td>
+            <td>{{firma.time_diff_cantidad}}</td>
+            <td class="text-capitalize">{{ firma.time_diff_medida }}</td>
+            <td><a class="btn btn-default btn-raised" ng-click="$ctrl.selectItem(firma)">Editar</a>
+                <a class="btn btn-danger btn-raised" ng-click="$ctrl.deleteItem(firma)">Eliminar</a>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
 
-<dir-pagination-controls class="pull-left" on-page-change="$ctrl.getClientes(newPageNumber, oldPageNumber)">
+<dir-pagination-controls class="pull-left">
 </dir-pagination-controls>

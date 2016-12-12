@@ -3,7 +3,9 @@ import template from './firmas-list.html';
 
 const FirmasListComponent = {
 	bindings: {
-		data: '<'
+		data: '<',
+        onSelectItem: '&',
+        onDeleteItem: '&',
 	},
 	controller,
 	template

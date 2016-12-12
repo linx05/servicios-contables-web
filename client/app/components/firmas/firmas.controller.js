@@ -1,92 +1,57 @@
+import moment from 'moment';
+
 export default class FirmasController {
-
-    constructor (DocumentosService, RecibosService, ModalService, toastr) {
+    constructor (AuthService, ClientesService, CuentasService, FirmasService, ModalService) {
         'ngInject';
-        this.documentosService = DocumentosService;
-        this.recibosService = RecibosService;
-        this.toastr = toastr;
+        this.moment = moment;
+        this.authService = AuthService;
+        this.clientesService = ClientesService;
+        this.cuentasService = CuentasService;
+        this.firmasService = FirmasService;
         this.modal = ModalService;
-        this.modalOptionsRecibo = {
-            component: '<recibos-edit></recibos-edit>',
-            title: 'Firma'
-        };
         this.modalOptions = {
-            component: '<pagos-edit></pagos-edit>',
-            title: 'Pago'
+            component: '<firmas-edit></firmas-edit>',
+            title: 'Firmas',
         };
-    }
-
-    $onChanges (changes) {
-        this.documentos = this.data;
     }
 
     $onInit () {
+
     }
-
-    select ({data}) {
-        this.selectedClient = data;
-        this.enableAdd = true;
-    }
-
-    filterClientes(campo, search) {
-        if (search.length < 1) this.documentos = this.data;
-        else {
-            if (campo == 'cfd'){
-                this.documentos =_.filter(this.data, documento => {
-                    return documento.cfd == search;
-                });
-            }
-            else {
-                this.documentos =_.filter(this.data, documento => {
-                    return documento.cliente.rfc.toLowerCase().includes(search.toLowerCase())
-                        || documento.cliente.razon_social.toLowerCase().includes(search.toLowerCase());
-                });
-            }
-
+    $onChanges (changes) {
+        if(changes.data){
+            this.data = Object.assign({}, this.data);
         }
     }
 
-    add (type) {
-        this.modalToShow = this.modalOptionsRecibo;
-        if(type == 'pago') this.modalToShow = this.modalOptions;
-
-        this.modalToShow.data = {
-            cliente: this.selectedClient
-        };
-        if(type == 'pago') {
-            this.recibosService.builder
-                .where('pagado', '=', false)
-                .where('cliente', '=', this.selectedClient._id)
-                .build()
-                .then(recibos => {
-                    if(recibos.length>0) {
-                        this.modalToShow.data = Object.assign({},this.modalToShow.data, {recibos});
-                        this.modal.show(this.modalToShow)
-                            .then(() => this.clientesService.get().then(data => data));
-                    }
-                    else {
-                        this.toastr.error('El cliente no tiene ninguna cuenta pendiente!');
-                    }
-                })
-        }
-        else return this.modal.show(this.modalToShow)
-            .then(() => this.documentosService.get().then(data => data));
+    add (firma = null) {
+        let clients;
+        return this.clientesService.get()
+            .then(clientes => {
+                clients = clientes;
+                return this.cuentasService.find(this.authService.getId())
+            })
+            .then(cuenta => {
+                this.modalOptions.data = {
+                    firma,
+                    cuenta,
+                    clientes: clients
+                };
+                return this.modal.show(this.modalOptions)
+                    .then(() => this.firmasService.get().then(data => this.data = data));
+            });
     }
 
-    edit (documentos = {}) {
-        this.modalOptions.data = documentos;
-        this.modalOptions.stateParams.id = documentos._id ? documentos._id : 'add';
-        this.modal.show(modalOptions);
+    edit({ data }) {
+        this.firmasService.find(data._id)
+            .then((data) => {
+                return this.add(data);
+            });
     }
 
-    findAndEdit ({data}) {
-        this.documentosService.find(data._id).then(data => this.edit(data));
-    }
+    delete({ data }) {
+        this.firmasService.remove(data._id)
+            .then(() => this.firmasService.get().then(data => this.data = data));
 
-    remove ({data}) {
-        this.modalOptions.id = data._id;
-        this.modalOptions.service = this.documentosService;
-        this.modal.warn(modalOptions);
     }
-
 }

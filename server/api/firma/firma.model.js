@@ -12,8 +12,7 @@ let firmaSchema = new Schema({
         required: true
     },
     fecha_notificacion: {
-        type: Date,
-        required: true
+        type: Date
     },
     time_diff_cantidad  :{
         type: Number,
@@ -27,16 +26,19 @@ let firmaSchema = new Schema({
     notificacion_time_diff: {
         type: String,
     },
-    pagado: {
-        type: Boolean,
-        required: true,
-        default: false
-    },
     cliente: {
         type: Schema.ObjectId,
         ref : 'Cliente',
         required: true
-    }
+    },
+    correo : {
+      type: String
+    },
+    empleado: {
+        type: Schema.ObjectId,
+        ref : 'User',
+        required: true
+    },
 
 }, {
     timestamps: {

@@ -10,12 +10,16 @@ export default class FirmasListController {
 		}
 	}
 
-	selectItem($event) {
-		this.onSelectItem({ $event });
-	}
+    selectItem(item) {
+        this.onSelectItem({
+            $event: {data: item}
+        });
+    }
 
-	deleteItem($event) {
-		this.onDeleteItem({ $event });
-	}
+    deleteItem(item) {
+        this.onDeleteItem({
+            $event: {data: item}
+        });
+    }
 
 }

@@ -2,7 +2,7 @@ export default class DocumentosListController {
 
     constructor (DocumentosService, RecibosService, ModalService, toastr) {
         'ngInject';
-        this.documentosService = DocumentosService;
+        this.firmasService = DocumentosService;
         this.recibosService = RecibosService;
         this.toastr = toastr;
         this.modal = ModalService;
@@ -70,7 +70,7 @@ export default class DocumentosListController {
                 })
         }
         else return this.modal.show(this.modalToShow)
-            .then(() => this.documentosService.get().then(data => data));
+            .then(() => this.firmasService.get().then(data => data));
     }
 
     edit (documentos = {}) {
@@ -80,12 +80,12 @@ export default class DocumentosListController {
     }
 
     findAndEdit ({data}) {
-        this.documentosService.find(data._id).then(data => this.edit(data));
+        this.firmasService.find(data._id).then(data => this.edit(data));
     }
 
     remove ({data}) {
         this.modalOptions.id = data._id;
-        this.modalOptions.service = this.documentosService;
+        this.modalOptions.service = this.firmasService;
         this.modal.warn(modalOptions);
     }
 

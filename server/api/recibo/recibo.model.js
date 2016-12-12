@@ -61,6 +61,6 @@ reciboSchema.path('total').get(toRound2);
 reciboSchema.path('saldo_pendiente').get(toRound2);
 
 module.exports = {
-    Recibo: mongoose.model('Firma', reciboSchema),
+    Recibo: mongoose.model('Recibo', reciboSchema),
     ReciboSchema: reciboSchema
 };

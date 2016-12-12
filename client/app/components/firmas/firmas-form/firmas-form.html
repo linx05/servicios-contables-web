@@ -1,0 +1,53 @@
+<div class="container-fluid">
+    <form class="form" name="firmasForm" ng-submit="$ctrl.onSubmit();">
+        <fieldset>
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" class="form-control" uib-datepicker-popup="MM/dd/yyyy"
+                           ng-model="$ctrl.firma.fecha_vencimiento"
+                           is-open="$ctrl.popup1.opened" datepicker-options="$ctrl.dateOptions"
+                           ng-required="true" close-text="Close" placeholder="Fecha de Vencimiento" id="fecha_vencimiento"/>
+                    <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="$ctrl.popup1.opened = !$ctrl.popup1.opened"><i
+                class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="cliente">Cliente</label>
+                <select class="form-control" name="cliente" id="cliente" ng-model="$ctrl.firma.cliente"
+                        ng-options="cliente._id as cliente.razon_social for cliente in $ctrl.data.clientes track by cliente.id" ng-required="true">
+                    <option value="" selected="selected">Escoje un Cliente</option>
+                </select>
+            </div>
+            <div class="row">
+                    <div class="col-sm-12">
+                        <label class="form-control">Notificacion</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="form-group">
+                            <input class="form-control" type="number" id="time_diff_cantidad" name="email"
+                                   min="0" step="1"
+                                   ng-model="$ctrl.firma.time_diff_cantidad"
+                                   ng-required="true"
+                                   placeholder="Horas o Dias">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <select class="form-control" name="time_diff" id="time_diff" ng-model="$ctrl.firma.time_diff_medida"
+                                    ng-options="o as o for o in $ctrl.timeDiffMedidas" ng-required="true">
+                                <option value="" selected="selected">Medida</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            <div class="form-group">
+                <input class="form-control" type="email" id="email" name="email" ng-model="$ctrl.firma.correo"
+                       ng-required="true"
+                       placeholder="Correo">
+            </div>
+        </fieldset>
+    </form>
+</div>
+<i ng-init="$ctrl.setForm(firmasForm)"></i>

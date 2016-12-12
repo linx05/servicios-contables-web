@@ -34,7 +34,7 @@ var all = {
         session: 'api-secret'
     },
 
-    DEFAULT_PASSWORD: process.env.DEFAULT_PWD || '12346578',
+    DEFAULT_PASSWORD: process.env.DEFAULT_PWD || '12345678',
 
     // List of user roles
     userRoles: ['guest', 'user', 'admin'],

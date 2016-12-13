@@ -1,6 +1,7 @@
 'use strict';
 
 let User = require('./user.model').User;
+const Firma = require('../firma/firma.model').Firma;
 const claveDefecto = config.DEFAULT_PASSWORD || '12345678';
 
 // Get list of Documento
@@ -42,7 +43,7 @@ exports.createLocalAccount = (req, res) => {
         cuenta: local
     });
     return user.save(function (err, user) {
-        if (!err) return res.status(201).json(user);s
+        if (!err) return res.status(201).json(user);
         return handleError(res, err, 422);
     });
 };
@@ -78,12 +79,10 @@ exports.destroy = function (req, res) {
         if (!user) {
             return res.status(404).send('Not Found');
         }
-        user.remove(function (err) {
-            if (err) {
-                return handleError(res, err);
-            }
-            return res.status(204).send('No Content');
-        });
+        return Firma.remove({'empleado': user._id})
+            .then(() => user.remove())
+            .then(() => res.status(204).send('No Content'))
+            .catch(err => handleError(res, err));
     });
 };
 

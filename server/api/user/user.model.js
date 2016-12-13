@@ -1,8 +1,8 @@
 'use strict';
 
 let uniqueValidator = require('mongoose-unique-validator');
-let bcrypt = require('bcryptjs');
-let Schema = mongoose.Schema;
+const bcrypt = require('bcryptjs');
+const Schema = mongoose.Schema;
 
 mongoose.plugin(uniqueValidator);
 

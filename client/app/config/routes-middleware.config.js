@@ -4,7 +4,7 @@ export default function routesMiddleware($transitions, AuthService) {
 	const $state = $transitions._router.stateService;
 
 	$state.defaultErrorHandler((error) => {
-		// console.log(error);
+		console.log(error);
 	});
 
 	$transitions.onStart({}, (transition) => {
@@ -14,7 +14,6 @@ export default function routesMiddleware($transitions, AuthService) {
 		const params        = transition.params();
 
 		if (!state) return redirectToHome();
-
 		// if (typeof homeMiddleWare()                       !== 'undefined') return;
 		if (typeof requiresLoginMiddleware(requiresLogin) !== 'undefined') return;
 		if (typeof levelsMiddleware(levels)               !== 'undefined') return;
@@ -59,9 +58,9 @@ export default function routesMiddleware($transitions, AuthService) {
 
     function getHome() {
         switch (auth.getLoginLevel()) {
-            case 'admin'  	: return 'admin';
-            case 'empleado'	: return 'empleado';
-            case 'cliente'	: return 'cliente';
+            case 'admin'  	: return 'clientes';
+            case 'empleado'	: return 'clientes';
+            case 'cliente'	: return 'estado';
             default			: return 'login';
         }
     }

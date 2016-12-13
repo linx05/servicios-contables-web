@@ -9,7 +9,7 @@
             <th>Fecha</th>
             <th>Monto</th>
             <th><span class="glyphicon glyphicon-usd"></span></th>
-            <th></th>
+            <!--<th></th>-->
         </tr>
         </thead>
         <tbody>
@@ -22,9 +22,9 @@
             <td>$ {{documento.pago ? documento.pago.total : documento.recibo.total}}</td>
             <td><span class="glyphicon" ng-class="documento.pago ? 'glyphicon-ban-circle' : documento.recibo.pagado
             ? 'glyphicon-ok-circle text-success' : 'glyphicon-remove-circle text-danger'"></span></td>
-            <td><a class="btn btn-default btn-raised" ng-click="$ctrl.selectItem(documento)">Editar</a>
-                <a class="btn btn-danger btn-raised" ng-click="$ctrl.deleteItem(documento)">Eliminar</a>
-            </td>
+            <!--<td><a class="btn btn-default btn-raised" ng-click="$ctrl.selectItem(documento)">Editar</a>-->
+                <!--<a class="btn btn-danger btn-raised" ng-click="$ctrl.deleteItem(documento)">Eliminar</a>-->
+            <!--</td>-->
         </tr>
         </tbody>
     </table>

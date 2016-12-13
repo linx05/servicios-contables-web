@@ -1,11 +1,16 @@
 'use strict';
 
 const uniqueValidator = require('mongoose-unique-validator');
+// const mongoose_delete = require('mongoose-delete');
 const bcrypt = require('bcryptjs');
 const Schema = mongoose.Schema;
 
-const LocalAccount = require('./local/local.model');
+const Documento = require('../documento/documento.model').Documento;
+const Recibo = require('../recibo/recibo.model').Recibo;
+const Pago = require('../pago/pago.model').Pago;
 
+
+const LocalAccount = require('./local/local.model');
 mongoose.plugin(uniqueValidator);
 
 let contactoSchema = new Schema({
@@ -108,8 +113,16 @@ let clienteSchema = new Schema({
         updatedAt: 'updated_at',
     }
 });
-
 clienteSchema.plugin(uniqueValidator);
+// clienteSchema.plugin(mongoose_delete,{ overrideMethods: true, validateBeforeDelete: false  });
+
+clienteSchema.pre('remove', function(next) {
+    Documento.remove({cliente: this._id}).exec();
+    Pago.remove({'recibo.cliente': this._id}).exec();
+    Recibo.remove({cliente: this._id}).exec();
+    next();
+});
+
 
 clienteSchema.pre('save', function (callback) {
     let user = this;

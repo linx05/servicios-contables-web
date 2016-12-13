@@ -21,7 +21,6 @@ let componentModule = angular.module('app.components', [
     Cuentas,
     Empleado,
     User,
-    Home,
     Documentos,
     EstadoCuenta,
     Firmas,

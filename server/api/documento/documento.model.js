@@ -26,7 +26,7 @@ let documentoSchema = new Schema({
     },
     recibo: {
         type: Schema.ObjectId,
-        ref: 'Firma'
+        ref: 'Recibo'
     },
     cfd : {
         type: Number

@@ -16,9 +16,6 @@
                 <li class="active" ng-show="$ctrl.level === 'empleado' || $ctrl.level === 'admin'">
                     <a href="#" ui-sref="clientes">Clientes</a>
                 </li>
-                <li class="" ng-show="$ctrl.level === 'empleado' || $ctrl.level === 'admin'">
-                    <a href="#" ui-sref="documentos">Documentos</a>
-                </li>
                 <li uib-dropdown class="" ng-show="$ctrl.level === 'empleado' || $ctrl.level === 'admin'">
                     <a href="#" uib-dropdown-toggle>Documentos <b class="caret"></b></a>
                     <ul class="dropdown-menu" uib-dropdown-menu role="menu">
@@ -32,7 +29,7 @@
                 <li class="" ng-show="$ctrl.level === 'empleado' || $ctrl.level === 'admin'">
                     <a href="#" ui-sref="firmas">Firmas</a>
                 </li>
-                <li class="">
+                <li class="" ng-show="$ctrl.level === 'cliente'">
                     <a ui-sref="estado">Estados de Cuenta</a>
                 </li>
             </ul>

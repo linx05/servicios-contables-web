@@ -2,14 +2,14 @@ export default class DocumentosController {
 
     constructor (DocumentosService, RecibosService, ModalService, toastr) {
         'ngInject';
-        this.firmasService = DocumentosService;
+        this.documentosService = DocumentosService;
         // this.pagosService = PagosService;
         this.recibosService = RecibosService;
         this.toastr = toastr;
         this.modal = ModalService;
         this.modalOptionsRecibo = {
             component: '<recibos-edit></recibos-edit>',
-            title: 'Firma'
+            title: 'Recibo'
         };
         this.modalOptions = {
             component: '<pagos-edit></pagos-edit>',
@@ -55,7 +55,7 @@ export default class DocumentosController {
                     if(recibos.length>0) {
                         this.modalToShow.data = Object.assign({},this.modalToShow.data, {recibos});
                         this.modal.show(this.modalToShow)
-                            .then(() => this.firmasService.get().then(data => data));
+                            .then(() => this.documentosService.get().then(data => data));
                     }
                     else {
                         this.toastr.error('El cliente no tiene ninguna cuenta pendiente!');
@@ -63,7 +63,7 @@ export default class DocumentosController {
                 })
         }
         else return this.modal.show(this.modalToShow)
-            .then(() => this.firmasService.get().then(data => data));
+            .then(() => this.documentosService.get().then(data => data));
     }
 
     edit (documentos = {}) {
@@ -73,12 +73,12 @@ export default class DocumentosController {
     }
 
     findAndEdit ({data}) {
-        this.firmasService.find(data._id).then(data => this.edit(data));
+        this.documentosService.find(data._id).then(data => this.edit(data));
     }
 
     remove ({data}) {
         this.modalOptions.id = data._id;
-        this.modalOptions.service = this.firmasService;
+        this.modalOptions.service = this.documentosService;
         this.modal.warn(modalOptions);
     }
 

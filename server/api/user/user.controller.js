@@ -1,7 +1,7 @@
 'use strict';
 
 let User = require('./user.model').User;
-const claveDefecto = config.DEFAULT_PASSWORD || '12345';
+const claveDefecto = config.DEFAULT_PASSWORD || '12345678';
 
 // Get list of Documento
 exports.index = function (req, res) {

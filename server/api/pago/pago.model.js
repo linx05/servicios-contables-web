@@ -12,7 +12,7 @@ let pagoSchema = new Schema({
     },
     recibo: {
         type: Schema.ObjectId,
-        ref: 'Firma',
+        ref: 'Recibo',
         required: true
     },
     cfd : {
